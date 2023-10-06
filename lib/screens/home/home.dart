@@ -9,33 +9,39 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _buildLogoImage(),
-                const SizedBox(height: 20),
-                _buildWelcomeText(),
-                const SizedBox(height: 200),
-                _buildLoginButton(context, 'Sign in', Icons.arrow_forward, () {}),
-                const SizedBox(height: 30),
-                _buildLoginButton(
-                  context,
-                  'Sign up',
-                  Icons.arrow_forward,
-                      () {},
-                  backgroundColor: AppColors.blackColor,
-                  borderColor: AppColors.borderColor,
-                  textColor: AppColors.borderColor,
-                  iconColor: AppColors.borderColor,
+      body: Stack(
+        children: [
+          Image.asset(
+            'assets/jpg/background_image.jpg',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildLogoImage(),
+                    const SizedBox(height: 20),
+                    _buildWelcomeText(),
+                    const SizedBox(height: 200),
+                    _buildLoginButton(context, 'Sign in', Icons.arrow_forward, () { Navigator.pushNamed(context, '/login'); }),
+                    const SizedBox(height: 20),
+                    _buildLoginButton(context, 'Sign up', Icons.arrow_forward, () {},
+                      backgroundColor: AppColors.blackColor,
+                      borderColor: AppColors.borderColor,
+                      textColor: AppColors.borderColor,
+                      iconColor: AppColors.borderColor,
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -74,7 +80,7 @@ class HomeScreen extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(40),
           side: BorderSide(color: borderColor ?? Colors.transparent),
-        ), backgroundColor: backgroundColor ?? AppColors.text,
+        ), backgroundColor: backgroundColor ?? AppColors.white,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

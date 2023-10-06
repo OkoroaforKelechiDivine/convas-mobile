@@ -17,7 +17,6 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(SplashController());
-
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

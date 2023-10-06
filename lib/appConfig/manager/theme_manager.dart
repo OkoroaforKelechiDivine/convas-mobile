@@ -6,7 +6,7 @@ import 'package:safe_chat/appConfig/manager/style_manager.dart';
 
 class AppColors {
   static Color appBackgroundColor = HexColor.fromHex('#000');
-  static Color text = Colors.white;
+  static Color white = Colors.white;
   static Color blackColor = const Color.fromRGBO(0, 0, 0, 1);
   static Color activeButton = HexColor.fromHex('#3AF9EF');
   static Color placeholderColor = HexColor.fromHex("#ABDECC");
@@ -26,11 +26,11 @@ extension HexColor on Color {
 
 ThemeData _appTheme = ThemeData(
   textTheme: TextTheme(
-      titleLarge: getBodyLargeStyle(color: AppColors.text),
-      bodyLarge: getBodyMediumBoldStyle(color: AppColors.text),
-      bodyMedium: getBodyMediumRegularStyle(color: AppColors.text),
-      bodySmall: getBodySmallStyle(color: AppColors.text),
-      labelSmall: getButtonLabelStyle(color: AppColors.text)
+      titleLarge: getBodyLargeStyle(color: AppColors.white),
+      bodyLarge: getBodyMediumBoldStyle(color: AppColors.white),
+      bodyMedium: getBodyMediumRegularStyle(color: AppColors.white),
+      bodySmall: getBodySmallStyle(color: AppColors.white),
+      labelSmall: getButtonLabelStyle(color: AppColors.white)
   ),
   scaffoldBackgroundColor: AppColors.appBackgroundColor,
   appBarTheme:
@@ -46,7 +46,7 @@ ThemeData _appTheme = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         fixedSize: const Size(350, 70),
-        backgroundColor: AppColors.text,
+        backgroundColor: AppColors.white,
         foregroundColor: AppColors.appBackgroundColor,
         textStyle: getBodySmallStyle(
             color: AppColors.appBackgroundColor,
