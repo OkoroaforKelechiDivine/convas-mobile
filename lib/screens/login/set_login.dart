@@ -3,8 +3,15 @@ import 'package:flutter/material.dart';
 import '../../appConfig/manager/font_manager.dart';
 import '../../appConfig/manager/theme_manager.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: AppFontSize.s24,
                           color: AppColors.white,
-                          fontWeight: AppFontWeight.bold
+                          fontWeight: AppFontWeight.bold,
                         ),
                       ),
                     ),
@@ -96,9 +103,9 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget _buildPasswordField() {
-    return TextFormField(
+    return TextField(
       style: TextStyle(color: AppColors.white),
-      obscureText: true,
+      obscureText: !_isPasswordVisible,
       decoration: InputDecoration(
         labelText: 'Password',
         labelStyle: TextStyle(color: AppColors.white),
@@ -108,15 +115,24 @@ class LoginScreen extends StatelessWidget {
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: AppColors.white),
         ),
+        suffixIcon: IconButton(
+          onPressed: () {
+            setState(() {
+              _isPasswordVisible = !_isPasswordVisible;
+            });
+          },
+          icon: Icon(
+            _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+            color: AppColors.white,
+          ),
+        ),
       ),
     );
   }
 
   Widget _buildLoginButton(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        // Add your login logic here
-      },
+      onPressed: () {},
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(40),
@@ -132,7 +148,7 @@ class LoginScreen extends StatelessWidget {
               color: AppColors.blackColor,
             ),
           ),
-          const SizedBox(width: 8), // Add spacing
+          const SizedBox(width: 8),
           Icon(
             Icons.arrow_forward,
             color: AppColors.blackColor,
