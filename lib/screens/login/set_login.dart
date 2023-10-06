@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Sign up',
+                        'Sign In',
                         style: TextStyle(
                           fontSize: AppFontSize.s24,
                           color: AppColors.white,

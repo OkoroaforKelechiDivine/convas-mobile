@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(height: 200),
                     _buildLoginButton(context, 'Sign in', Icons.arrow_forward, () { Navigator.pushNamed(context, '/login'); }),
                     const SizedBox(height: 20),
-                    _buildLoginButton(context, 'Sign up', Icons.arrow_forward, () {},
+                    _buildLoginButton(context, 'Sign up', Icons.arrow_forward, () {Navigator.pushNamed(context, '/sign_up'); },
                       backgroundColor: AppColors.blackColor,
                       borderColor: AppColors.borderColor,
                       textColor: AppColors.borderColor,
