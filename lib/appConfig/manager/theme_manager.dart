@@ -7,11 +7,11 @@ import 'package:safe_chat/appConfig/manager/style_manager.dart';
 class AppColors {
   static Color appBackgroundColor = HexColor.fromHex('#000');
   static Color text = Colors.white;
+  static Color blackColor = const Color.fromRGBO(0, 0, 0, 1);
   static Color activeButton = HexColor.fromHex('#3AF9EF');
-  static Color inputDecoratorColor = HexColor.fromHex('#ABDECC');
-  static Color iconColor = HexColor.fromHex("FFFFFF");
   static Color placeholderColor = HexColor.fromHex("#ABDECC");
-  static Color pinCodeBackgroundColor = HexColor.fromHex("#364366");
+  static Color borderColor = const Color.fromRGBO(58, 249, 239, 1);
+
 }
 
 extension HexColor on Color {
@@ -45,7 +45,7 @@ ThemeData _appTheme = ThemeData(
       )),
   elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        fixedSize: const Size(275, 40),
+        fixedSize: const Size(350, 70),
         backgroundColor: AppColors.text,
         foregroundColor: AppColors.appBackgroundColor,
         textStyle: getBodySmallStyle(
