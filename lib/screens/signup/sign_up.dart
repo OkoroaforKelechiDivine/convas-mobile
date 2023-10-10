@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safe_chat/appConfig/manager/theme_manager.dart';
 
 import '../../appConfig/manager/font_manager.dart';
+import '../../service/auth_service.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -121,10 +122,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget _buildSignUpButton(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () async {
+        final firstName = _firstNameController.text;
+        final lastName = _lastNameController.text;
+        final email = _emailController.text;
+        final password = _passwordController.text;
+
+        final success = await ApiService.registerUser(
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+        );
+
+        if (success) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Registration Success. Well done Kelechi'),
+            ),
+          );        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Registration failed. Please try again.'),
+            ),
+          );
+        }
+      },
       child: const Text('Sign Up'),
     );
   }
+
 
   Widget _buildForgotPasswordText() {
     return TextButton(
