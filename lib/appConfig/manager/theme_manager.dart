@@ -5,13 +5,12 @@ import 'package:safe_chat/appConfig/manager/font_manager.dart';
 import 'package:safe_chat/appConfig/manager/style_manager.dart';
 
 class AppColors {
-  static Color appBackgroundColor = HexColor.fromHex('#000');
-  static Color text = Colors.white;
-  static Color activeButton = HexColor.fromHex('#3AF9EF');
-  static Color inputDecoratorColor = HexColor.fromHex('#ABDECC');
-  static Color iconColor = HexColor.fromHex("FFFFFF");
-  static Color placeholderColor = HexColor.fromHex("#ABDECC");
-  static Color pinCodeBackgroundColor = HexColor.fromHex("#364366");
+  // static Color appBackgroundColor = HexColor.fromHex('#FFF');
+  static Color white = Colors.white;
+  static Color blackColor = const Color.fromRGBO(0, 0, 0, 1);
+  static Color activeButton = HexColor.fromHex('#3D49B8');
+  static Color green = HexColor.fromHex('#3DB86E');
+  static Color grey = HexColor.fromHex('#848586');
 }
 
 extension HexColor on Color {
@@ -26,13 +25,13 @@ extension HexColor on Color {
 
 ThemeData _appTheme = ThemeData(
   textTheme: TextTheme(
-      titleLarge: getBodyLargeStyle(color: AppColors.text),
-      bodyLarge: getBodyMediumBoldStyle(color: AppColors.text),
-      bodyMedium: getBodyMediumRegularStyle(color: AppColors.text),
-      bodySmall: getBodySmallStyle(color: AppColors.text),
-      labelSmall: getButtonLabelStyle(color: AppColors.text)
+      titleLarge: getBodyLargeStyle(color: AppColors.blackColor),
+      bodyLarge: getBodyMediumBoldStyle(color: AppColors.blackColor),
+      bodyMedium: getBodyMediumRegularStyle(color: AppColors.blackColor),
+      bodySmall: getBodySmallStyle(color: AppColors.blackColor),
+      labelSmall: getButtonLabelStyle(color: AppColors.blackColor)
   ),
-  scaffoldBackgroundColor: AppColors.appBackgroundColor,
+  scaffoldBackgroundColor: AppColors.white,
   appBarTheme:
   const AppBarTheme(backgroundColor: Colors.transparent, elevation: 0),
   textButtonTheme: TextButtonThemeData(
@@ -45,20 +44,21 @@ ThemeData _appTheme = ThemeData(
       )),
   elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        fixedSize: const Size(275, 40),
-        backgroundColor: AppColors.text,
-        foregroundColor: AppColors.appBackgroundColor,
+        fixedSize: const Size(500, 50),
+        backgroundColor: AppColors.activeButton,
+        foregroundColor: AppColors.white,
         textStyle: getBodySmallStyle(
-            color: AppColors.appBackgroundColor,
+            color: AppColors.white,
             fontSize: AppFontSize.s14
         ),
       )),
   inputDecorationTheme: InputDecorationTheme(
       hintStyle: getBodySmallStyle(
-          color: AppColors.appBackgroundColor,
+          color: AppColors.white,
           fontSize: AppFontSize.s14
       ),
-      fillColor: AppColors.placeholderColor.withOpacity(0.3),
+      fillColor: AppColors.white,
+      focusColor: AppColors.white,
       filled: true,
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)
       )
