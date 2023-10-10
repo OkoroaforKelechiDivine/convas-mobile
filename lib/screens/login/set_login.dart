@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safe_chat/appConfig/manager/theme_manager.dart';
 
 import '../../appConfig/manager/font_manager.dart';
+import '../../service/auth_service.dart'; // Import your AuthApiService
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -11,7 +12,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _isLoading = false;
   bool _isPasswordVisible = false;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                _buildUsernameField(),
+                _buildEmailField(),
                 _buildPasswordField(),
                 const SizedBox(height: 60),
                 _buildLoginButton(context),
@@ -69,11 +73,12 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildUsernameField() {
+  Widget _buildEmailField() {
     return TextFormField(
+      controller: _emailController,
       style: TextStyle(color: AppColors.blackColor),
       decoration: InputDecoration(
-        labelText: 'Username',
+        labelText: 'Email',
         labelStyle: TextStyle(color: AppColors.grey),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: AppColors.grey),
@@ -87,11 +92,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildPasswordField() {
     return TextField(
+      controller: _passwordController,
       style: TextStyle(color: AppColors.blackColor),
       obscureText: !_isPasswordVisible,
       decoration: InputDecoration(
         labelText: 'Password',
-        labelStyle: TextStyle(color:AppColors.grey),
+        labelStyle: TextStyle(color: AppColors.grey),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: AppColors.grey),
         ),
@@ -115,10 +121,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildLoginButton(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        // Add your login logic here
-      },
-      child: const Text('Log in'),
+      onPressed: _isLoading ? null : () => _performLogin(context),
+      child: _isLoading ? CircularProgressIndicator(color: AppColors.activeButton,) : const Text('Log in'),
     );
   }
 
@@ -132,5 +136,24 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void _performLogin(BuildContext context) async {
+    final email = _emailController.text;
+    final password = _passwordController.text;
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    await AuthApiService.login(
+        email: email,
+        password: password,
+        context:  context
+    );
+
+    setState(() {
+      _isLoading = false;
+    });
   }
 }
