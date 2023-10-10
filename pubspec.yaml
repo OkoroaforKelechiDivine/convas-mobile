@@ -14,6 +14,8 @@ dependencies:
   google_fonts: ^4.0.1
   get: ^4.6.5
   font_awesome_flutter:
+  dio:
+
 
 
 dev_dependencies:

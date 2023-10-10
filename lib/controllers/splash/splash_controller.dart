@@ -7,7 +7,7 @@ class SplashController extends GetxController {
   void onInit() {
     super.onInit();
     Timer(const Duration(milliseconds: 10000), () {
-      Get.offNamed("/home");
+      Get.offNamed("/info1");
     });
   }
 }

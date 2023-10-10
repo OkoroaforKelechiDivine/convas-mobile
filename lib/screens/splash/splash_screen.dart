@@ -9,7 +9,8 @@ class SplashScreen extends StatelessWidget {
   Widget _buildLogoImage() {
     return Center(
       child: Image.asset(
-        'assets/jpg/safeChatLogo.jpg',
+        'assets/jpg/safeChatWhiteLogo.jpg',
+        height: 500,
       ),
     );
   }
