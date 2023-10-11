@@ -55,21 +55,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 10),
                 _buildInputField(
                   label: 'First Name',
+                  hint: 'First Name',
                   controller: _firstNameController,
                   errorText: _firstNameError,
                 ),
                 _buildInputField(
+                  hint: 'Last Name',
                   label: 'Last Name',
                   controller: _lastNameController,
                   errorText: _lastNameError,
                 ),
                 _buildInputField(
+                  hint: 'Email',
                   label: 'Email',
                   controller: _emailController,
                   errorText: _emailError,
                 ),
                 _buildInputField(
                   label: 'Password',
+                  hint: 'Mypassword123@#',
                   controller: _passwordController,
                   isPassword: true,
                   obscureText: _obscurePassword,
@@ -82,6 +86,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 _buildInputField(
                   label: 'Confirm Password',
+                  hint: 'Confirm Password',
                   controller: _confirmPassword,
                   isPassword: true,
                   obscureText: _obscureConfirmPassword,
@@ -120,6 +125,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget _buildInputField({
     required String label,
+    required String hint,
     required TextEditingController controller,
     bool isPassword = false,
     bool obscureText = false,
@@ -132,6 +138,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       obscureText: obscureText,
       decoration: InputDecoration(
         labelText: label,
+        hintText: hint,
+        hintStyle: TextStyle(color: AppColors.grey),
         labelStyle: TextStyle(color: AppColors.grey),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
