@@ -55,48 +55,51 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 20),
-            child: Text(
-              'Enter the verification code',
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const SizedBox(height: 30),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buildDigitInput(0),
-              const SizedBox(width: 20),
-              buildDigitInput(1),
-              const SizedBox(width: 20),
-              buildDigitInput(2),
-              const SizedBox(width: 20),
-              buildDigitInput(3),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text("Did not receive a code"),
-              TextButton(
-                onPressed: () {},
-                child: const Text("Resend"),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: Text(
+                'Enter the verification code',
+                textAlign: TextAlign.center,
               ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: ElevatedButton(
-              onPressed: () {
-              },
-              child: const Text("Send"),
             ),
-          ),
-        ],
+            const SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                buildDigitInput(0),
+                const SizedBox(width: 20),
+                buildDigitInput(1),
+                const SizedBox(width: 20),
+                buildDigitInput(2),
+                const SizedBox(width: 20),
+                buildDigitInput(3),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Did not receive a code"),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text("Resend"),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Handle the button press
+                },
+                child: const Text("Send"),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
