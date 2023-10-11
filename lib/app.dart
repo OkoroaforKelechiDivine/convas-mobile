@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
+import 'package:safe_chat/check_mail/set_check_mail.dart';
+import 'package:safe_chat/screens/forgot_password/set_forgot_password.dart';
 import 'package:safe_chat/screens/home/home.dart';
 import 'package:safe_chat/screens/info/info1_screen.dart';
 import 'package:safe_chat/screens/info/info2_screen.dart';
@@ -28,6 +30,8 @@ class MyApp extends StatelessWidget {
         "/info2": (context) => const InfoTwoScreen(),
         "/login": (context) => const LoginScreen(),
         "/sign_up": (context) => const SignUpScreen(),
+        "/forget-password": (context) => const ForgotPasswordScreen(),
+        "/check-mail": (context) => const CheckMailScreen(),
       },
     );
   }

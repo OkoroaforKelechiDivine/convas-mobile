@@ -2,6 +2,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:safe_chat/appConfig/manager/theme_manager.dart';
 import 'package:safe_chat/service/token/TokenProvider.dart';
 
 class AuthApiService {
@@ -70,9 +71,37 @@ class AuthApiService {
     }
   }
 
+  static Future<void> forgotPassword({
+    required String email,
+    required BuildContext context,
+  }) async {
+    final connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      showSnackBar(context, "Network problem. Please check your internet connection.");
+      return;
+    }
+
+    try {
+      final response = await dio.post(
+        'https://cyber-mind-deploy.onrender.com/api/auths/forgot-password',
+        data: {
+          'email': email,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        Navigator.of(context).pushReplacementNamed('/check-mail');
+        showSnackBar(context, "Password reset email sent successfully.");
+      }
+    } catch (e) {
+      showSnackBar(context, "Password reset request failed. Please try again.");
+    }
+  }
+
   static void showSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        backgroundColor: AppColors.activeButton,
         content: Text(message),
       ),
     );

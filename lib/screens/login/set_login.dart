@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 _buildLoginButton(context),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: _buildForgotPasswordText(),
+                  child: _buildForgotPasswordText(context),
                 ),
               ],
             ),
@@ -126,9 +126,11 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildForgotPasswordText() {
+  Widget _buildForgotPasswordText(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context).pushNamed('/forget-password');
+      },
       child: Text(
         'Forgot Password?',
         style: TextStyle(

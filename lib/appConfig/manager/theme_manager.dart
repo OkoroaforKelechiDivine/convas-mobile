@@ -32,8 +32,7 @@ ThemeData _appTheme = ThemeData(
       labelSmall: getButtonLabelStyle(color: AppColors.blackColor)
   ),
   scaffoldBackgroundColor: AppColors.white,
-  appBarTheme:
-  const AppBarTheme(backgroundColor: Colors.transparent, elevation: 0),
+  appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent, elevation: 0),
   textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: AppColors.activeButton,
