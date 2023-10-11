@@ -9,6 +9,7 @@ import 'package:safe_chat/screens/info/info2_screen.dart';
 import 'package:safe_chat/screens/login/set_login.dart';
 import 'package:safe_chat/screens/signup/sign_up.dart';
 import 'package:safe_chat/screens/splash/splash_screen.dart';
+import 'package:safe_chat/screens/verify_code/set_verify_code.dart';
 
 import 'appConfig/manager/theme_manager.dart';
 
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         "/sign_up": (context) => const SignUpScreen(),
         "/forget-password": (context) => const ForgotPasswordScreen(),
         "/check-mail": (context) => const CheckMailScreen(),
+        "/verify_code": (context) => const VerifyCodeScreen(),
       },
     );
   }

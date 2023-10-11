@@ -34,8 +34,11 @@ class AuthApiService {
       if (response.statusCode == 201) {
         Navigator.of(context).pushReplacementNamed('/login');
       }
+      if(response.statusCode == 409){
+        showSnackBar(context, "User with that email already exists");
+      }
     } catch (e) {
-      showSnackBar(context, "User with that email already exists");
+      showSnackBar(context, "Error creating account. Please try again");
     }
   }
 
@@ -67,7 +70,7 @@ class AuthApiService {
         context.read<TokenProvider>().setToken(token);
       }
     } catch (e) {
-      showSnackBar(context, "Login failed. Please try again.");
+      showSnackBar(context, "Incorrect Email and Password. Please try again.");
     }
   }
 
@@ -102,7 +105,7 @@ class AuthApiService {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: AppColors.activeButton,
-        content: Text(message),
+        content: Center(child: Text(message)),
       ),
     );
   }
