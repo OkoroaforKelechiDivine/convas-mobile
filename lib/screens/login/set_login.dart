@@ -121,8 +121,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildLoginButton(BuildContext context) {
     return ElevatedButton(
-      onPressed: _isLoading ? null : () => _performLogin(context),
-      child: _isLoading ? CircularProgressIndicator(color: AppColors.activeButton,) : const Text('Log in'),
+      // onPressed: _isLoading ? null : () => _performLogin(context),
+      onPressed: (){},
+      // child: _isLoading ? CircularProgressIndicator(color: AppColors.activeButton,) : const Text('Log in'),
+      child: const Text('Log in'),
     );
   }
 

@@ -93,7 +93,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
               padding: const EdgeInsets.all(20),
               child: ElevatedButton(
                 onPressed: () {
-                  // Handle the button press
+                  Navigator.of(context).pushReplacementNamed('/reset-password');
                 },
                 child: const Text("Send"),
               ),
