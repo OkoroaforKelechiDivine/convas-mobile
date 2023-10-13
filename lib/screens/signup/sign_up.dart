@@ -39,7 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 _buildSafeChatLogo(),
                 const SizedBox(height: 30),
                 Align(
@@ -176,8 +176,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget _buildSignUpButton(BuildContext context) {
     return ElevatedButton(
-      onPressed: _isLoading ? null : _performSignUp,
-      child: _isLoading ? CircularProgressIndicator(color: AppColors.activeButton,) : const Text('Sign Up'),
+      // onPressed: _isLoading ? null : _performSignUp,
+      onPressed: (){},
+      // child: _isLoading ? CircularProgressIndicator(color: AppColors.activeButton,) : const Text('Sign Up'),
+      child: const Text('Sign Up'),
     );
   }
 
