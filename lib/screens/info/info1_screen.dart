@@ -72,7 +72,7 @@ class InfoOneScreen extends StatelessWidget {
         const SizedBox(height: 20),
         ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/sign_up');
+            Navigator.pushNamed(context, '/info2');
           },
           child: const Text('Sign Up'),
         ),

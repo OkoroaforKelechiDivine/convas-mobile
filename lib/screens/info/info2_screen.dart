@@ -82,7 +82,7 @@ class InfoTwoScreen extends StatelessWidget {
   Widget _buildGetStartedButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.pushNamed(context, '/info2');
+        Navigator.pushNamed(context, '/sign_up');
       },
       child: const Text('Get Started'),
     );
