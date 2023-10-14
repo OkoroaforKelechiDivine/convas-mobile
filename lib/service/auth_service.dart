@@ -7,6 +7,8 @@ import 'package:safe_chat/service/token/TokenProvider.dart';
 
 class AuthApiService {
   static final Dio dio = Dio();
+  static const String baseUrl = 'https://cyber-mind-deploy.onrender.com/api/auths';
+
   static Future<void> registerUser({
     required String firstName,
     required String lastName,
@@ -20,24 +22,21 @@ class AuthApiService {
       return;
     }
 
-    try {
-      final response = await dio.post(
-        'https://cyber-mind-deploy.onrender.com/api/auths/create',
-        data: {
-          'firstName': firstName,
-          'lastName': lastName,
-          'email': email,
-          'password': password,
-        },
-      );
+    final response = await dio.post(
+      '$baseUrl/create',
+      data: {
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': email,
+        'password': password,
+      },
+    );
 
-      if (response.statusCode == 201) {
-        Navigator.of(context).pushReplacementNamed('/login');
-      }
-      if(response.statusCode == 409){
-        showSnackBar(context, "User with that email already exists");
-      }
-    } catch (e) {
+    if (response.statusCode == 201) {
+      Navigator.of(context).pushReplacementNamed('/profile');
+    } else if (response.statusCode == 409) {
+      showSnackBar(context, "User with that email already exists");
+    } else {
       showSnackBar(context, "Error creating account. Please try again");
     }
   }
@@ -55,7 +54,7 @@ class AuthApiService {
 
     try {
       final response = await dio.post(
-        'https://cyber-mind-deploy.onrender.com/api/auths/login',
+        '$baseUrl/login',
         data: {
           'email': email,
           'password': password,
@@ -86,7 +85,7 @@ class AuthApiService {
 
     try {
       final response = await dio.post(
-        'https://cyber-mind-deploy.onrender.com/api/auths/forgot-password',
+        '$baseUrl/forgot-password',
         data: {
           'email': email,
         },
