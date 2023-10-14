@@ -28,6 +28,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _passwordError = '';
   String _confirmPasswordError = '';
 
+  String _selectedGender = 'Male';
+
+  final List<String> _genderOptions = ['Male', 'Female', 'Other'];
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +59,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 20),
                 _buildInputField(
                   label: 'First Name',
                   hint: 'First Name',
@@ -99,6 +104,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                   errorText: _confirmPasswordError,
                 ),
+                _buildGenderDropdown(),
+
                 const SizedBox(height: 60),
                 _buildSignUpButton(context),
               ],
@@ -178,12 +185,55 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget _buildSignUpButton(BuildContext context) {
     return ElevatedButton(
-      // onPressed: _isLoading ? null : _performSignUp,
-      onPressed: (){},
-      // child: _isLoading ? CircularProgressIndicator(color: AppColors.activeButton,) : const Text('Sign Up'),
-      child: const Text('Sign Up'),
+      onPressed: _isLoading ? null : _performSignUp,
+      // onPressed: (){},
+      child: _isLoading ? CircularProgressIndicator(color: AppColors.activeButton,) : const Text('Sign Up'),
+      // child: const Text('Sign Up'),
     );
   }
+
+  Widget _buildGenderDropdown() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Gender',
+          style: TextStyle(
+            color: AppColors.grey,
+          ),
+        ),
+        DropdownButtonFormField<String>(
+          value: _selectedGender,
+          onChanged: (String? newValue) {
+            setState(() {
+              _selectedGender = newValue!;
+            });
+          },
+          items: _genderOptions.map((String gender) {
+            return DropdownMenuItem<String>(
+              value: gender,
+              child: Text(gender),
+            );
+          }).toList(),
+          decoration: InputDecoration(
+            hintText: 'Select Gender',
+            hintStyle: TextStyle(color: AppColors.grey),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColors.green,
+              ),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColors.green,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
 
   void _performSignUp() async {
     final firstName = _firstNameController.text;
