@@ -29,18 +29,20 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 _buildSafeChatLogo(),
-                const SizedBox(height: 40),
+                const SizedBox(height: 50),
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Log In',
-                    style: TextStyle(
-                      fontSize: AppFontSize.s20,
-                      color: AppColors.activeButton,
+                  child: Center(
+                    child: Text(
+                      'Welcome Back',
+                      style: TextStyle(
+                        fontSize: AppFontSize.s20,
+                        color: AppColors.activeButton,
+                      ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 40),
                 _buildEmailField(),
                 _buildPasswordField(),
                 const SizedBox(height: 60),
@@ -62,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
-          'Safe Chat',
+          'SafeChat',
           style: TextStyle(fontSize: AppFontSize.s20),
         ),
         Image.asset(

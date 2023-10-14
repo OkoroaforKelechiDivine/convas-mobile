@@ -41,18 +41,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
               children: <Widget>[
                 const SizedBox(height: 50),
                 _buildSafeChatLogo(),
-                const SizedBox(height: 30),
+                const SizedBox(height: 50),
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      fontSize: AppFontSize.s20,
-                      color: AppColors.activeButton,
+                  child: Center(
+                    child: Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        fontSize: AppFontSize.s20,
+                        color: AppColors.activeButton,
+                      ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 40),
                 _buildInputField(
                   label: 'First Name',
                   hint: 'First Name',
@@ -112,7 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
-          'Safe Chat',
+          'SafeChat',
           style: TextStyle(fontSize: AppFontSize.s20),
         ),
         Image.asset(
