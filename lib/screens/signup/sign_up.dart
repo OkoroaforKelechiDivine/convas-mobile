@@ -39,37 +39,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 _buildSafeChatLogo(),
-                const SizedBox(height: 30),
+                const SizedBox(height: 50),
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      fontSize: AppFontSize.s20,
-                      color: AppColors.activeButton,
+                  child: Center(
+                    child: Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        fontSize: AppFontSize.s20,
+                        color: AppColors.activeButton,
+                      ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 40),
                 _buildInputField(
                   label: 'First Name',
+                  hint: 'First Name',
                   controller: _firstNameController,
                   errorText: _firstNameError,
                 ),
                 _buildInputField(
+                  hint: 'Last Name',
                   label: 'Last Name',
                   controller: _lastNameController,
                   errorText: _lastNameError,
                 ),
                 _buildInputField(
+                  hint: 'Email',
                   label: 'Email',
                   controller: _emailController,
                   errorText: _emailError,
                 ),
                 _buildInputField(
                   label: 'Password',
+                  hint: 'Mypassword123@#',
                   controller: _passwordController,
                   isPassword: true,
                   obscureText: _obscurePassword,
@@ -82,6 +88,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 _buildInputField(
                   label: 'Confirm Password',
+                  hint: 'Confirm Password',
                   controller: _confirmPassword,
                   isPassword: true,
                   obscureText: _obscureConfirmPassword,
@@ -107,7 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
-          'Safe Chat',
+          'SafeChat',
           style: TextStyle(fontSize: AppFontSize.s20),
         ),
         Image.asset(
@@ -120,6 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget _buildInputField({
     required String label,
+    required String hint,
     required TextEditingController controller,
     bool isPassword = false,
     bool obscureText = false,
@@ -132,6 +140,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       obscureText: obscureText,
       decoration: InputDecoration(
         labelText: label,
+        hintText: hint,
+        hintStyle: TextStyle(color: AppColors.grey),
         labelStyle: TextStyle(color: AppColors.grey),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
@@ -168,8 +178,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget _buildSignUpButton(BuildContext context) {
     return ElevatedButton(
-      onPressed: _isLoading ? null : _performSignUp,
-      child: _isLoading ? CircularProgressIndicator(color: AppColors.activeButton,) : const Text('Sign Up'),
+      // onPressed: _isLoading ? null : _performSignUp,
+      onPressed: (){},
+      // child: _isLoading ? CircularProgressIndicator(color: AppColors.activeButton,) : const Text('Sign Up'),
+      child: const Text('Sign Up'),
     );
   }
 

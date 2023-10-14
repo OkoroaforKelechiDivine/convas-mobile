@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safe_chat/appConfig/manager/theme_manager.dart';
 
 import '../../appConfig/manager/font_manager.dart';
-import '../../service/auth_service.dart'; // Import your AuthApiService
+import '../../service/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -29,25 +29,27 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 _buildSafeChatLogo(),
-                const SizedBox(height: 40),
+                const SizedBox(height: 50),
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Log In',
-                    style: TextStyle(
-                      fontSize: AppFontSize.s20,
-                      color: AppColors.activeButton,
+                  child: Center(
+                    child: Text(
+                      'Welcome Back',
+                      style: TextStyle(
+                        fontSize: AppFontSize.s20,
+                        color: AppColors.activeButton,
+                      ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 40),
                 _buildEmailField(),
                 _buildPasswordField(),
                 const SizedBox(height: 60),
                 _buildLoginButton(context),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: _buildForgotPasswordText(),
+                  child: _buildForgotPasswordText(context),
                 ),
               ],
             ),
@@ -62,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
-          'Safe Chat',
+          'SafeChat',
           style: TextStyle(fontSize: AppFontSize.s20),
         ),
         Image.asset(
@@ -121,19 +123,22 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildLoginButton(BuildContext context) {
     return ElevatedButton(
-      onPressed: _isLoading ? null : () => _performLogin(context),
-      child: _isLoading ? CircularProgressIndicator(color: AppColors.activeButton,) : const Text('Log in'),
+      // onPressed: _isLoading ? null : () => _performLogin(context),
+      onPressed: (){
+        Navigator.of(context).pushReplacementNamed('/profile');
+      },
+      // child: _isLoading ? CircularProgressIndicator(color: AppColors.activeButton,) : const Text('Log in'),
+      child: const Text('Log in'),
     );
   }
 
-  Widget _buildForgotPasswordText() {
+  Widget _buildForgotPasswordText(BuildContext context) {
     return TextButton(
-      onPressed: () {},
-      child: Text(
-        'Forgot Password?',
-        style: TextStyle(
-          color: AppColors.green,
-        ),
+      onPressed: () {
+        Navigator.of(context).pushNamed('/forget-password');
+      },
+      child: const Text(
+        'Forgot Password?'
       ),
     );
   }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:safe_chat/appConfig/manager/font_manager.dart';
 
-import '../../appConfig/manager/theme_manager.dart';
-
 class InfoTwoScreen extends StatelessWidget {
   const InfoTwoScreen({Key? key}) : super(key: key);
 
@@ -20,8 +18,11 @@ class InfoTwoScreen extends StatelessWidget {
                 _buildSafeChatLogo(),
                 const SizedBox(height: 50),
                 _buildImage(),
+                const SizedBox(height: 20),
+                _buildChatConfidentlyText(),
+                _buildAdditionalText(),
                 const SizedBox(height: 100),
-                _buildButtons(context),
+                _buildGetStartedButton(context),
               ],
             ),
           ),
@@ -35,7 +36,7 @@ class InfoTwoScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
-          'Safe Chat',
+          'SafeChat',
           style: TextStyle(fontSize: AppFontSize.s20),
         ),
         Image.asset(
@@ -48,35 +49,43 @@ class InfoTwoScreen extends StatelessWidget {
 
   Widget _buildImage() {
     return Image.asset(
-      'assets/jpg/illustration.jpg',
+      'assets/jpg/pana.jpg',
       height: 200,
     );
   }
 
-  Widget _buildButtons(BuildContext context) {
-    return Column(
-      children: [
-        ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/login');
-          },
-          style: ElevatedButton.styleFrom(
-            foregroundColor: AppColors.activeButton,
-            backgroundColor: AppColors.white,
-            side: BorderSide(
-                color: AppColors.activeButton
-            )
-          ),
-          child: const Text('Login'),
-        ),
-        const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/sign_up');
-          },
-          child: const Text('Sign Up'),
-        ),
-      ],
+  Widget _buildChatConfidentlyText() {
+    return const Text(
+      'Chat Confidently,',
+      style: TextStyle(fontSize: AppFontSize.s18),
     );
   }
+
+  Widget _buildAdditionalText() {
+    return const Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "We've got your",
+            style: TextStyle(fontSize: AppFontSize.s18),
+          ),
+          Text(
+            'back.',
+            style: TextStyle(fontSize: AppFontSize.s18),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGetStartedButton(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.pushNamed(context, '/sign_up');
+      },
+      child: const Text('Get Started'),
+    );
+  }
+
 }
