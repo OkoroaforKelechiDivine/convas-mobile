@@ -162,5 +162,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  void _saveProfile() {}
+  void _saveProfile() {
+    Navigator.pushNamed(context, "/home_page");
+  }
 }
