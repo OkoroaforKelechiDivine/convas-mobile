@@ -14,6 +14,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool _isLoading = false;
   bool _isPasswordVisible = false;
+  bool _emailError = false;
+  bool _passwordError = false;
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -83,11 +86,26 @@ class _LoginScreenState extends State<LoginScreen> {
         labelText: 'Email',
         labelStyle: TextStyle(color: AppColors.grey),
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.grey),
+          borderSide: BorderSide(
+            color: _emailError ? Colors.red : AppColors.grey,
+          ),
         ),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.grey),
+          borderSide: BorderSide(
+            color: _emailError ? Colors.red : AppColors.grey,
+          ),
         ),
+        errorBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.grey,
+          ),
+        ),
+        focusedErrorBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.grey,
+          ),
+        ),
+        errorText: _emailError ? 'Email cannot be empty' : null,
       ),
     );
   }
@@ -101,11 +119,26 @@ class _LoginScreenState extends State<LoginScreen> {
         labelText: 'Password',
         labelStyle: TextStyle(color: AppColors.grey),
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.grey),
+          borderSide: BorderSide(
+            color: _passwordError ? Colors.red : AppColors.grey,
+          ),
         ),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.grey),
+          borderSide: BorderSide(
+            color: _passwordError ? Colors.red : AppColors.grey,
+          ),
         ),
+        errorBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.grey,
+          ),
+        ),
+        focusedErrorBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.grey,
+          ),
+        ),
+        errorText: _passwordError ? 'Password cannot be empty' : null,
         suffixIcon: IconButton(
           onPressed: () {
             setState(() {
@@ -123,12 +156,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildLoginButton(BuildContext context) {
     return ElevatedButton(
-      // onPressed: _isLoading ? null : () => _performLogin(context),
-      onPressed: (){
-        Navigator.of(context).pushReplacementNamed('/profile');
-      },
-      // child: _isLoading ? CircularProgressIndicator(color: AppColors.activeButton,) : const Text('Log in'),
-      child: const Text('Log in'),
+      onPressed: _isLoading ? null : () => _performLogin(context),
+      child: _isLoading ? CircularProgressIndicator(color: AppColors.activeButton,) : const Text('Log in'),
     );
   }
 
@@ -147,18 +176,41 @@ class _LoginScreenState extends State<LoginScreen> {
     final email = _emailController.text;
     final password = _passwordController.text;
 
-    setState(() {
-      _isLoading = true;
-    });
+    // Validate email and password
+    if (email.isEmpty) {
+      setState(() {
+        _emailError = true;
+      });
+      return;
+    } else {
+      setState(() {
+        _emailError = false;
+      });
 
-    await AuthApiService.loginUser(
+      if (password.isEmpty) {
+        setState(() {
+          _passwordError = true;
+        });
+        return;
+      } else {
+        setState(() {
+          _passwordError = false;
+        });
+      }
+
+      setState(() {
+        _isLoading = true;
+      });
+
+      await AuthApiService.loginUser(
         email: email,
         password: password,
-        context:  context
-    );
+        context: context,
+      );
 
-    setState(() {
-      _isLoading = false;
-    });
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 }
