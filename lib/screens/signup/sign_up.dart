@@ -27,6 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _emailError = '';
   String _passwordError = '';
   String _confirmPasswordError = '';
+  String _genderError = '';
 
   String _selectedGender = 'Male';
 
@@ -223,6 +224,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 color: AppColors.green,
               ),
             ),
+            errorText: _genderError,
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                 color: AppColors.green,
@@ -234,12 +236,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-
   void _performSignUp() async {
     final firstName = _firstNameController.text;
     final lastName = _lastNameController.text;
     final email = _emailController.text;
     final password = _passwordController.text;
+    final gender = _genderOptions.toString();
 
     setState(() {
       _firstNameError = '';
@@ -273,6 +275,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
       });
       return;
     }
+
+    if (gender.isEmpty) {
+      setState(() {
+        _genderError = 'Gender cannot be empty';
+        _isLoading = false;
+      });
+      return;
+    }
+    
     if (!RegExp(
         r"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,}$")
         .hasMatch(password)) {
@@ -303,6 +314,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       context: context,
       firstName: firstName,
       lastName: lastName,
+      gender: gender,
       email: email,
       password: password,
     );

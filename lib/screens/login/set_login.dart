@@ -151,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
       _isLoading = true;
     });
 
-    await AuthApiService.login(
+    await AuthApiService.loginUser(
         email: email,
         password: password,
         context:  context

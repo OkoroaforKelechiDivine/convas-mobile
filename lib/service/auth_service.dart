@@ -13,6 +13,7 @@ class AuthApiService {
     required String firstName,
     required String lastName,
     required String email,
+    required String gender,
     required String password,
     required BuildContext context,
   }) async {
@@ -28,6 +29,7 @@ class AuthApiService {
         'firstName': firstName,
         'lastName': lastName,
         'email': email,
+        'gender': gender,
         'password': password,
       },
     );
@@ -41,7 +43,7 @@ class AuthApiService {
     }
   }
 
-  static Future<void> login({
+  static Future<void> loginUser({
     required String email,
     required String password,
     required BuildContext context,
