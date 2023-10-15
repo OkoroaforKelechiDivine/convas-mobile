@@ -54,25 +54,26 @@ class AuthApiService {
       return;
     }
 
-    final response = await dio.post(
-      '$baseUrl/login',
-      data: {
-        'email': email,
-        'password': password,
-      },
-    );
+    try {
+      final response = await dio.post(
+        '$baseUrl/login',
+        data: {
+          'email': email,
+          'password': password,
+        },
+      );
 
-    if (response.statusCode == 200) {
-      showSnackBar(context, "Login successful!");
-      Navigator.of(context).pushReplacementNamed('/home');
-      final Map<String, dynamic> responseData = response.data;
-      final String token = responseData['token'];
-      context.read<TokenProvider>().setToken(token);
-    } else if(response.statusCode == 401){
-      showSnackBar(context, "Incorrect Email and Password. Please try again.");
-    }
-    else if(response.statusCode == 403){
-      showSnackBar(context, "Incorrect Email and Password. Please try again.");
+      if (response.statusCode == 200) {
+        showSnackBar(context, "Login successful!");
+        Navigator.of(context).pushReplacementNamed('/home');
+        final Map<String, dynamic> responseData = response.data;
+        final String token = responseData['token'];
+        context.read<TokenProvider>().setToken(token);
+      } else if (response.statusCode == 403) {
+        showSnackBar(context, "Incorrect Email and Password. Please try again.");
+      }
+    } catch (e) {
+      showSnackBar(context, "Incorrect Email and Password.");
     }
   }
 
