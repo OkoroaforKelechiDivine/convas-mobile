@@ -56,11 +56,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             CircleAvatar(
               radius: 60,
-              backgroundColor: Colors.grey,
-              backgroundImage: _image != null
-                  ? FileImage(_image!)
-                  : isMale
-                  ? const AssetImage('assets/jpg/male-default-avatar.jpg')
+              backgroundColor: AppColors.grey,
+              backgroundImage: _image != null ? FileImage(_image!)
+                  : isMale ? const AssetImage('assets/jpg/male-default-avatar.jpg')
                   : const AssetImage('assets/jpg/female-default-avatar.jpg') as ImageProvider,
             ),
             Positioned(

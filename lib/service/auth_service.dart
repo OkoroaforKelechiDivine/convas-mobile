@@ -22,9 +22,7 @@ class AuthApiService {
       showSnackBar(context, "Network problem. Please check your internet connection.");
       return;
     }
-
     final capitalizedGender = gender.toUpperCase();
-
     try {
       final response = await dio.post(
         '$baseUrl/create',
@@ -36,7 +34,6 @@ class AuthApiService {
           'password': password,
         },
       );
-
       if (response.statusCode == 201) {
         Navigator.of(context).pushReplacementNamed('/profile', arguments: capitalizedGender);
       } else if (response.statusCode == 409) {
