@@ -20,8 +20,6 @@ dependencies:
   jwt_decode:
   image_picker:
 
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

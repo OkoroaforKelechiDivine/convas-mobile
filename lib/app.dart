@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.fadeIn,
       transitionDuration: const Duration(microseconds: 40),
       debugShowCheckedModeBanner: false,
-      title: 'Safe Chat',
+      title: 'SafeChat',
       theme: getApplicationTheme(),
       home: const SplashScreen(),
       routes: {

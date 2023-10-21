@@ -23,23 +23,27 @@ class AuthApiService {
       return;
     }
 
-    final response = await dio.post(
-      '$baseUrl/create',
-      data: {
-        'firstName': firstName,
-        'lastName': lastName,
-        'email': email,
-        'gender': gender,
-        'password': password,
-      },
-    );
+    final capitalizedGender = gender.toUpperCase();
 
-    if (response.statusCode == 201) {
-      Navigator.of(context).pushReplacementNamed('/profile');
-    } else if (response.statusCode == 409) {
-      showSnackBar(context, "User with that email already exists");
-    } else {
-      showSnackBar(context, "Error creating account. Please try again");
+    try {
+      final response = await dio.post(
+        '$baseUrl/create',
+        data: {
+          'firstName': firstName,
+          'lastName': lastName,
+          'email': email,
+          'gender': capitalizedGender,
+          'password': password,
+        },
+      );
+
+      if (response.statusCode == 201) {
+        Navigator.of(context).pushReplacementNamed('/profile');
+      } else if (response.statusCode == 409) {
+        showSnackBar(context, "User with that email already exists");
+      }
+    } catch (e) {
+      showSnackBar(context, "An error occurred. Please try again later.");
     }
   }
 
