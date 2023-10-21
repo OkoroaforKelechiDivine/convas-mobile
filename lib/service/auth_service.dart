@@ -13,6 +13,7 @@ class AuthApiService {
     required String firstName,
     required String lastName,
     required String email,
+    required String gender,
     required String password,
     required BuildContext context,
   }) async {
@@ -22,26 +23,31 @@ class AuthApiService {
       return;
     }
 
-    final response = await dio.post(
-      '$baseUrl/create',
-      data: {
-        'firstName': firstName,
-        'lastName': lastName,
-        'email': email,
-        'password': password,
-      },
-    );
+    final capitalizedGender = gender.toUpperCase();
 
-    if (response.statusCode == 201) {
-      Navigator.of(context).pushReplacementNamed('/profile');
-    } else if (response.statusCode == 409) {
-      showSnackBar(context, "User with that email already exists");
-    } else {
-      showSnackBar(context, "Error creating account. Please try again");
+    try {
+      final response = await dio.post(
+        '$baseUrl/create',
+        data: {
+          'firstName': firstName,
+          'lastName': lastName,
+          'email': email,
+          'gender': capitalizedGender,
+          'password': password,
+        },
+      );
+
+      if (response.statusCode == 201) {
+        Navigator.of(context).pushReplacementNamed('/profile');
+      } else if (response.statusCode == 409) {
+        showSnackBar(context, "User with that email already exists");
+      }
+    } catch (e) {
+      showSnackBar(context, "An error occurred. Please try again later.");
     }
   }
 
-  static Future<void> login({
+  static Future<void> loginUser({
     required String email,
     required String password,
     required BuildContext context,
@@ -67,9 +73,11 @@ class AuthApiService {
         final Map<String, dynamic> responseData = response.data;
         final String token = responseData['token'];
         context.read<TokenProvider>().setToken(token);
+      } else if (response.statusCode == 403) {
+        showSnackBar(context, "Incorrect Email and Password. Please try again.");
       }
     } catch (e) {
-      showSnackBar(context, "Incorrect Email and Password. Please try again.");
+      showSnackBar(context, "Incorrect Email and Password.");
     }
   }
 

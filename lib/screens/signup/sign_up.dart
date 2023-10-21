@@ -27,11 +27,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _emailError = '';
   String _passwordError = '';
   String _confirmPasswordError = '';
-
-  String _selectedGender = 'Male';
+  String? _selectedGender;
 
   final List<String> _genderOptions = ['Male', 'Female', 'Other'];
-
 
   @override
   Widget build(BuildContext context) {
@@ -196,17 +194,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Gender',
-          style: TextStyle(
-            color: AppColors.grey,
-          ),
-        ),
         DropdownButtonFormField<String>(
           value: _selectedGender,
           onChanged: (String? newValue) {
             setState(() {
-              _selectedGender = newValue!;
+              _selectedGender = newValue;
             });
           },
           items: _genderOptions.map((String gender) {
@@ -216,7 +208,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             );
           }).toList(),
           decoration: InputDecoration(
-            hintText: 'Select Gender',
+            hintText: _selectedGender == null ? 'Select Gender' : null, // Show the hint text when _selectedGender is null
             hintStyle: TextStyle(color: AppColors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(
@@ -233,13 +225,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ],
     );
   }
-
-
   void _performSignUp() async {
     final firstName = _firstNameController.text;
     final lastName = _lastNameController.text;
     final email = _emailController.text;
     final password = _passwordController.text;
+    final gender = _selectedGender;
 
     setState(() {
       _firstNameError = '';
@@ -273,6 +264,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       });
       return;
     }
+
     if (!RegExp(
         r"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,}$")
         .hasMatch(password)) {
@@ -303,6 +295,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       context: context,
       firstName: firstName,
       lastName: lastName,
+      gender: gender!,
       email: email,
       password: password,
     );
