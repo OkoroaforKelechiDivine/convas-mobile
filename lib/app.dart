@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         "/check-mail": (context) => const CheckMailScreen(),
         "/verify_code": (context) => const VerifyCodeScreen(),
         "/reset-password": (context) => const ResetPasscodeScreen(),
-        "/profile": (context) => const ProfileScreen(),
+        "/profile": (context) => const ProfileScreen(selectedGender: ''),
         "/home_page": (context) => const HomePageScreen(),
       },
     );

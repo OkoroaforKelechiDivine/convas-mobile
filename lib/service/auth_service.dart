@@ -38,7 +38,7 @@ class AuthApiService {
       );
 
       if (response.statusCode == 201) {
-        Navigator.of(context).pushReplacementNamed('/profile');
+        Navigator.of(context).pushReplacementNamed('/profile', arguments: capitalizedGender);
       } else if (response.statusCode == 409) {
         showSnackBar(context, "User with that email already exists");
       }
