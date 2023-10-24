@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../model/user_model.dart';
+import '../screens/profile/profile_details.dart';
 import '../service/token/TokenProvider.dart';
 import '../service/user_service/user_service.dart';
 
@@ -40,7 +41,15 @@ class _GetAllUsersScreenState extends State<GetAllUsersScreen> {
   }
 
   void _navigateToUserProfile(AppUser user) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {
+          return ProfileDetailsScreen(user: user);
+        },
+      ),
+    );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +67,10 @@ class _GetAllUsersScreenState extends State<GetAllUsersScreen> {
             title: Text(user.firstName ?? 'Unknown'),
             subtitle: Text(user.email ?? 'No Email'),
             onTap: () {
-              // When the user's profile picture is tapped, navigate to their profile
               _navigateToUserProfile(user);
             },
             leading: GestureDetector(
               onTap: () {
-                // When the profile picture is tapped, navigate to the user's profile
                 _navigateToUserProfile(user);
               },
               child: CircleAvatar(
