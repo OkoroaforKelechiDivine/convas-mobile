@@ -8,6 +8,7 @@ import 'package:safe_chat/service/token/TokenProvider.dart';
 class AuthApiService {
   static final Dio dio = Dio();
   static const String baseUrl = 'https://cyber-mind-deploy.onrender.com/api/auths';
+  static String? userId;
 
   static Future<void> registerUser({
     required String firstName,
@@ -35,7 +36,10 @@ class AuthApiService {
         },
       );
       if (response.statusCode == 201) {
-        Navigator.of(context).pushReplacementNamed('/profile', arguments: capitalizedGender);
+        final Map<String, dynamic> responseData = response.data;
+        userId = responseData['id'];
+        print(userId);
+        Navigator.of(context).pushReplacementNamed('/login');
       } else if (response.statusCode == 409) {
         showSnackBar(context, "User with that email already exists");
       }
@@ -65,14 +69,14 @@ class AuthApiService {
       );
 
       if (response.statusCode == 200) {
-        showSnackBar(context, "Login successful!");
-        Navigator.of(context).pushReplacementNamed('/home');
         final Map<String, dynamic> responseData = response.data;
-        final String token = responseData['token'];
+        final String token = responseData['data']['token'];
+        showSnackBar(context, "Login successful!");
+        print("this is the token" + token);
+        Navigator.of(context).pushReplacementNamed('/get_all_users');
         context.read<TokenProvider>().setToken(token);
-      } else if (response.statusCode == 403) {
-        showSnackBar(context, "Incorrect Email and Password. Please try again.");
       }
+
     } catch (e) {
       showSnackBar(context, "Incorrect Email and Password.");
     }

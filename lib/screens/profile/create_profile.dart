@@ -91,7 +91,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final greenUnderline = UnderlineInputBorder(
       borderSide: BorderSide(color: AppColors.green),
     );
-
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(

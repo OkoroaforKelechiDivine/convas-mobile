@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safe_chat/appConfig/manager/theme_manager.dart';
 
 import '../../appConfig/manager/font_manager.dart';
-import '../../service/auth_service.dart';
+import '../../service/auth_service/auth_service.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
