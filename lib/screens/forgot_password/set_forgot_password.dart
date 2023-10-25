@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:safe_chat/appConfig/manager/font_manager.dart';
 
-import '../../service/auth_service.dart';
+import '../../service/auth_service/auth_service.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
@@ -90,11 +90,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       isLoading = true;
     });
 
-    final email = emailController.text;
-    await AuthApiService.forgotPassword(
-      email: email,
-      context: context,
-    );
+    // final email = emailController.text;
+    // await AuthApiService.forgotPassword(
+    //   email: email,
+    //   context: context,
+    // );
     setState(() {
       isLoading = false;
       emailSent = true;

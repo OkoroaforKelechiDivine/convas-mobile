@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../appConfig/manager/font_manager.dart';
 import '../../appConfig/manager/theme_manager.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class AuthScreen extends StatelessWidget {
+  const AuthScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

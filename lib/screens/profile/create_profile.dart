@@ -5,7 +5,10 @@ import 'dart:io';
 import 'package:safe_chat/appConfig/manager/theme_manager.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+
+  final String selectedGender;
+
+  const ProfileScreen({Key? key, required this.selectedGender}) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -16,12 +19,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? userName;
   String? firstName;
   String? lastName;
+  DateTime? dateOfBirth;
   String? emailAddress;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pushNamed("/sign_up");
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -36,6 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildProfilePicture() {
+    final isMale = widget.selectedGender == 'Male';
     return GestureDetector(
       onTap: _viewImage,
       child: Align(
@@ -44,8 +56,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             CircleAvatar(
               radius: 60,
-              backgroundColor: Colors.grey,
-              backgroundImage: _image != null ? FileImage(_image!) : null,
+              backgroundColor: AppColors.grey,
+              backgroundImage: _image != null ? FileImage(_image!)
+                  : isMale ? const AssetImage('assets/jpg/male-default-avatar.jpg')
+                  : const AssetImage('assets/jpg/female-default-avatar.jpg') as ImageProvider,
             ),
             Positioned(
               bottom: 0,
@@ -59,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   padding: const EdgeInsets.all(8),
                   child: Icon(
-                    Icons.edit,
+                    Icons.camera_alt,
                     size: 20,
                     color: AppColors.white,
                   ),
@@ -72,41 +86,61 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+
   Widget _buildProfileForm() {
+    final greenUnderline = UnderlineInputBorder(
+      borderSide: BorderSide(color: AppColors.green),
+    );
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          const SizedBox(height: 50),
           TextFormField(
-            decoration: const InputDecoration(labelText: 'Username'),
+            decoration: InputDecoration(
+              labelText: 'Username',
+              enabledBorder: greenUnderline,
+              focusedBorder: greenUnderline,
+            ),
             onChanged: (value) {
               setState(() {
                 userName = value;
               });
             },
           ),
-          const SizedBox(height: 20),
-          TextFormField(
-            decoration: const InputDecoration(labelText: 'First Name'),
-            onChanged: (value) {
-              setState(() {
-                firstName = value;
-              });
-            },
+          GestureDetector(
+            onTap: () => _selectDate(context),
+            child: AbsorbPointer(
+              child: TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Date of Birth', // Change the label
+                  enabledBorder: greenUnderline,
+                  focusedBorder: greenUnderline,
+                ),
+                controller: TextEditingController(
+                    text: dateOfBirth != null
+                        ? "${dateOfBirth!.day}/${dateOfBirth!.month}/${dateOfBirth!.year}"
+                        : ""), // Display selected date
+              ),
+            ),
           ),
-          const SizedBox(height: 20),
           TextFormField(
-            decoration: const InputDecoration(labelText: 'Last Name'),
+            decoration: InputDecoration(
+              labelText: 'Bio',
+              enabledBorder: greenUnderline,
+              focusedBorder: greenUnderline,
+            ),
             onChanged: (value) {
               setState(() {
                 lastName = value;
               });
             },
           ),
-          const SizedBox(height: 20),
           TextFormField(
-            decoration: const InputDecoration(labelText: 'Email Address'),
+            decoration: InputDecoration(
+              labelText: 'Hobbies',
+              enabledBorder: greenUnderline,
+              focusedBorder: greenUnderline,
+            ),
             onChanged: (value) {
               setState(() {
                 emailAddress = value;
@@ -122,6 +156,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+
 
   void _getImage() async {
     final picker = ImagePicker();
@@ -159,6 +194,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
           },
         ),
       );
+    }
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? selectedDate = await showDatePicker(
+      context: context,
+      initialDate: dateOfBirth ?? DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+
+    if (selectedDate != null) {
+      setState(() {
+        dateOfBirth = selectedDate;
+      });
     }
   }
 

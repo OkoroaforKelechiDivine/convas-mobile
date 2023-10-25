@@ -9,4 +9,8 @@ class TokenProvider with ChangeNotifier {
     _token = token;
     notifyListeners();
   }
+
+  String getToken() {
+    return _token;
+  }
 }
