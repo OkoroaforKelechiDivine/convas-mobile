@@ -13,13 +13,13 @@ class ProfileApiService {
       String hobbies,
       String imagePath,
       ) async {
-    final userId = AuthApiService.userId;
-    if (userId == null) {
-      return;
-    }
+    // final userId = AuthApiService.userId;
+    // if (userId == null) {
+    //   return;
+    // }
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/create/$userId'),
+        Uri.parse('$baseUrl/create'),
         headers: {
           'Content-Type': 'application/json',
         },

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:safe_chat/appConfig/manager/theme_manager.dart';
-
 import '../../appConfig/manager/font_manager.dart';
 import '../../service/auth_service/auth_service.dart';
 
@@ -28,6 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _passwordError = '';
   String _confirmPasswordError = '';
   String? _selectedGender;
+  String _responseError = ''; // Store response error message
 
   final List<String> _genderOptions = ['Male', 'Female', 'Other'];
 
@@ -103,7 +103,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   errorText: _confirmPasswordError,
                 ),
                 _buildGenderDropdown(),
-
+                if (_responseError.isNotEmpty)
+                  Text(
+                    _responseError,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: AppFontSize.s16,
+                    ),
+                  ),
                 const SizedBox(height: 60),
                 _buildSignUpButton(context),
               ],
@@ -170,7 +177,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
         errorText: errorText.isNotEmpty ? errorText : null,
         enabled: !_isLoading,
-        suffixIcon: isPassword ? IconButton(
+        suffixIcon: isPassword
+            ? IconButton(
           icon: Icon(
             obscureText ? Icons.visibility_off : Icons.visibility,
           ),
@@ -184,9 +192,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget _buildSignUpButton(BuildContext context) {
     return ElevatedButton(
       onPressed: _isLoading ? null : _performSignUp,
-      // onPressed: (){},
-      child: _isLoading ? CircularProgressIndicator(color: AppColors.activeButton,) : const Text('Sign Up'),
-      // child: const Text('Sign Up'),
+      child: _isLoading
+          ? CircularProgressIndicator(color: AppColors.activeButton)
+          : const Text('Sign Up'),
     );
   }
 
@@ -208,7 +216,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             );
           }).toList(),
           decoration: InputDecoration(
-            hintText: _selectedGender == null ? 'Select Gender' : null, // Show the hint text when _selectedGender is null
+            hintText: _selectedGender == null
+                ? 'Select Gender'
+                : null, // Show the hint text when _selectedGender is null
             hintStyle: TextStyle(color: AppColors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(
@@ -225,6 +235,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ],
     );
   }
+
   void _performSignUp() async {
     final firstName = _firstNameController.text;
     final lastName = _lastNameController.text;
@@ -239,6 +250,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       _passwordError = '';
       _confirmPasswordError = '';
       _isLoading = true;
+      _responseError = ''; // Clear previous response error
     });
 
     if (firstName.isEmpty) {
@@ -291,7 +303,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       return;
     }
 
-    await AuthApiService.registerUser(
+    final response = await AuthApiService.registerUser(
       context: context,
       firstName: firstName,
       lastName: lastName,
@@ -299,9 +311,5 @@ class _SignUpScreenState extends State<SignUpScreen> {
       email: email,
       password: password,
     );
-
-    setState(() {
-      _isLoading = false;
-    });
   }
 }

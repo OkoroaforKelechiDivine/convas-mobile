@@ -90,11 +90,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       isLoading = true;
     });
 
-    final email = emailController.text;
-    await AuthApiService.forgotPassword(
-      email: email,
-      context: context,
-    );
+    // final email = emailController.text;
+    // await AuthApiService.forgotPassword(
+    //   email: email,
+    //   context: context,
+    // );
     setState(() {
       isLoading = false;
       emailSent = true;

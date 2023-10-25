@@ -31,8 +31,8 @@ class _MessagingScreenState extends State<MessagingScreen> {
                 return Align(
                   alignment: message.isMe ? Alignment.centerRight : Alignment.centerLeft,
                   child: Container(
-                    margin: EdgeInsets.all(8.0),
-                    padding: EdgeInsets.all(12.0),
+                    margin: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: message.isMe ? Colors.blue : Colors.grey,
                       borderRadius: BorderRadius.circular(12),
@@ -60,12 +60,6 @@ class _MessagingScreenState extends State<MessagingScreen> {
       ),
       child: Row(
         children: [
-          IconButton(
-            onPressed: () {
-              _sendMessage(_textController.text, isMe: true);
-            },
-            icon: Icon(Icons.send),
-          ),
           Expanded(
             child: TextField(
               controller: _textController,
@@ -73,11 +67,17 @@ class _MessagingScreenState extends State<MessagingScreen> {
               onSubmitted: (text) {
                 _sendMessage(text, isMe: true);
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Type your message...',
                 border: InputBorder.none,
               ),
             ),
+          ),
+          IconButton(
+            onPressed: () {
+              _sendMessage(_textController.text, isMe: true);
+            },
+            icon: Icon(Icons.send),
           ),
         ],
       ),
