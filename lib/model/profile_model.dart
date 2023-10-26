@@ -1,32 +1,25 @@
+class ProfileDTO {
+  final String username;
+  final DateTime dateOfBirth;
+  final String bio;
+  final String profileImageUrl;
+  final String hobbies;
 
-class Profile {
-  String id;
-  String username;
-  DateTime dateOfBirth;
-  String bio;
-  String userId;
-  String profileImageUrl;
-  String hobbies;
-
-  Profile({
-    required this.id,
+  ProfileDTO({
     required this.username,
     required this.dateOfBirth,
     required this.bio,
-    required this.userId,
     required this.profileImageUrl,
     required this.hobbies,
   });
 
-  factory Profile.fromJson(Map<String, dynamic> json) {
-    return Profile(
-      id: json['id'],
-      username: json['username'],
-      dateOfBirth: DateTime.parse(json['dateOfBirth']),
-      bio: json['bio'],
-      userId: json['userId'],
-      profileImageUrl: json['profileImageUrl'],
-      hobbies: json['hobbies'],
-    );
+  Map<String, dynamic> toJson() {
+    return {
+      'username': username,
+      'dateOfBirth': dateOfBirth.toIso8601String(),
+      'bio': bio,
+      'profileImageUrl': profileImageUrl,
+      'hobbies': hobbies,
+    };
   }
 }

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../model/user_model.dart';
+import '../screens/chat/set_chat.dart';
 import '../screens/profile/profile_details.dart';
 import '../service/token/TokenProvider.dart';
 import '../service/user_service/user_service.dart';
@@ -21,11 +22,8 @@ class _GetAllUsersScreenState extends State<GetAllUsersScreen> {
   @override
   void initState() {
     super.initState();
-
-    final tokenProvider = Provider.of<TokenProvider>(context, listen: false);
-    final token = tokenProvider.getToken();
-
-    userService = UserService(token);
+    final tokenProvider = TokenProvider(); // You may need to create an instance of TokenProvider here
+    userService = UserService(tokenProvider);
     _fetchUsers();
   }
 
@@ -40,11 +38,22 @@ class _GetAllUsersScreenState extends State<GetAllUsersScreen> {
     }
   }
 
-  void _navigateToUserProfile(AppUser user) {
+  // void _navigateToUserProfile(AppUser user) {
+    // Navigator.of(context).push(
+      // MaterialPageRoute(
+      //   builder: (context) {
+      //     final tokenProvider = Provider.of<TokenProvider>(context, listen: false);
+      //     return ProfileDetailsScreen(user: user, tokenProvider: tokenProvider);
+      //   },
+      // ),
+    // );
+  // }
+
+  void _navigateToChatMessage(AppUser user) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
-          return ProfileDetailsScreen(user: user);
+          return MessagingScreen(user: user);
         },
       ),
     );
@@ -67,11 +76,11 @@ class _GetAllUsersScreenState extends State<GetAllUsersScreen> {
             title: Text(user.firstName ?? 'Unknown'),
             subtitle: Text(user.email ?? 'No Email'),
             onTap: () {
-              _navigateToUserProfile(user);
+              _navigateToChatMessage(user);
             },
             leading: GestureDetector(
               onTap: () {
-                _navigateToUserProfile(user);
+                _navigateToChatMessage(user);
               },
               child: CircleAvatar(
                 radius: 30,

@@ -1,4 +1,5 @@
 class AppUser {
+  final String id;
   final String? firstName;
   final String? lastName;
   final String? email;
@@ -6,6 +7,7 @@ class AppUser {
 
   AppUser({
     this.firstName,
+    required this.id,
     this.lastName,
     this.email,
     this.profileImageUrl,
@@ -15,6 +17,7 @@ class AppUser {
     return AppUser(
       firstName: json['firstName'],
       lastName: json['lastName'],
+      id: json['id'],
       email: json['email'],
       profileImageUrl: json['profileImageUrl'],
     );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../model/message.dart';
 import '../../model/user_model.dart';
+import '../../service/token/TokenProvider.dart';
+import '../../service/user_service/user_service.dart';
 
 class MessagingScreen extends StatefulWidget {
   final AppUser user;
@@ -14,6 +16,15 @@ class MessagingScreen extends StatefulWidget {
 class _MessagingScreenState extends State<MessagingScreen> {
   final List<Message> _messages = [];
   final TextEditingController _textController = TextEditingController();
+  late TokenProvider _tokenProvider;
+  late UserService _userService;
+
+  @override
+  void initState() {
+    super.initState();
+    _tokenProvider = TokenProvider();
+    _userService = UserService(_tokenProvider);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,13 +95,23 @@ class _MessagingScreenState extends State<MessagingScreen> {
     );
   }
 
-  void _sendMessage(String text, {bool isMe = false}) {
+  void _sendMessage(String text, {bool isMe = false}) async {
     if (text.isNotEmpty) {
       final newMessage = Message(text: text, isMe: isMe);
-      setState(() {
-        _messages.add(newMessage);
-        _textController.clear();
-      });
+      final senderId = _tokenProvider.getUserId();
+      try {
+        await _userService.sendMessage(
+          senderId: senderId,
+          receiverId: widget.user.id,
+          content: text,
+        );
+        setState(() {
+          _messages.add(newMessage);
+          _textController.clear();
+        });
+      } catch (e) {
+        print('Failed to send message: $e');
+      }
     }
   }
 }

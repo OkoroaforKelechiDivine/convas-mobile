@@ -311,5 +311,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       email: email,
       password: password,
     );
+    print(response);
   }
 }

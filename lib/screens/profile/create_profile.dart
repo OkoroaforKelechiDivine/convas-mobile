@@ -4,8 +4,10 @@ import 'dart:io';
 
 import 'package:safe_chat/appConfig/manager/theme_manager.dart';
 
-class ProfileScreen extends StatefulWidget {
+import '../../model/profile_model.dart';
+import '../../service/auth_service/auth_service.dart';
 
+class ProfileScreen extends StatefulWidget {
   final String selectedGender;
 
   const ProfileScreen({Key? key, required this.selectedGender}) : super(key: key);
@@ -21,6 +23,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? lastName;
   DateTime? dateOfBirth;
   String? emailAddress;
+  bool isLoading = false;
+
+  TextEditingController dateOfBirthController = TextEditingController(); // Add this controller
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             CircleAvatar(
               radius: 60,
               backgroundColor: AppColors.grey,
-              backgroundImage: _image != null ? FileImage(_image!)
-                  : isMale ? const AssetImage('assets/jpg/male-default-avatar.jpg')
-                  : const AssetImage('assets/jpg/female-default-avatar.jpg') as ImageProvider,
+              backgroundImage: _image != null ? FileImage(_image!) : (isMale ? AssetImage('assets/jpg/male-default-avatar.jpg') : AssetImage('assets/jpg/female-default-avatar.jpg')) as ImageProvider,
             ),
             Positioned(
               bottom: 0,
@@ -86,7 +89,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-
   Widget _buildProfileForm() {
     final greenUnderline = UnderlineInputBorder(
       borderSide: BorderSide(color: AppColors.green),
@@ -107,19 +109,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
               });
             },
           ),
+
           GestureDetector(
             onTap: () => _selectDate(context),
             child: AbsorbPointer(
               child: TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'Date of Birth', // Change the label
+                  labelText: 'Date of Birth',
                   enabledBorder: greenUnderline,
                   focusedBorder: greenUnderline,
                 ),
-                controller: TextEditingController(
-                    text: dateOfBirth != null
-                        ? "${dateOfBirth!.day}/${dateOfBirth!.month}/${dateOfBirth!.year}"
-                        : ""), // Display selected date
+                controller: dateOfBirthController,
               ),
             ),
           ),
@@ -149,14 +149,69 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           const SizedBox(height: 50),
           ElevatedButton(
-            onPressed: _saveProfile,
-            child: const Text('Complete'),
-          ),
+            onPressed: () async {
+              if (_validateForm()) {
+                setState(() {
+                  isLoading = true;
+                });
+                final profileDTO = ProfileDTO(
+                  username: userName!,
+                  dateOfBirth: dateOfBirth!,
+                  bio: lastName!,
+                  profileImageUrl: _image?.path ?? '',
+                  hobbies: emailAddress!,
+                );
+
+                final result = await AuthApiService.createProfile(
+                  profileDTO.username,
+                  profileDTO.dateOfBirth.toIso8601String(),
+                  profileDTO.bio,
+                  profileDTO.profileImageUrl,
+                  profileDTO.hobbies,
+                  context
+                );
+                if (result['success'] == true) {
+                  Future.delayed(const Duration(seconds: 1), () {
+                    Navigator.of(context).pushReplacementNamed('/login');
+                  });
+                } else {
+                  AuthApiService.showSnackBar(context, result['message']);
+                }
+                setState(() {
+                  isLoading = false;
+                });
+              }
+            },
+            child: isLoading ? CircularProgressIndicator(color: AppColors.activeButton) : const Text('Complete'),
+          )
         ],
       ),
     );
   }
 
+  bool _validateForm() {
+    if (userName == null || userName!.isEmpty) {
+      AuthApiService.showSnackBar(context, 'Username is required');
+      return false;
+    }
+
+    if (dateOfBirth == null) {
+      AuthApiService.showSnackBar(context, 'Date of Birth is required');
+      return false;
+    }
+
+    if (lastName == null || lastName!.isEmpty) {
+      AuthApiService.showSnackBar(context, 'Bio is required');
+      return false;
+    }
+
+    if (emailAddress == null || emailAddress!.isEmpty) {
+      AuthApiService.showSnackBar(context, 'Hobbies is required');
+      return false;
+    }
+
+    return true;
+  }
 
   void _getImage() async {
     final picker = ImagePicker();
@@ -208,11 +263,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (selectedDate != null) {
       setState(() {
         dateOfBirth = selectedDate;
+        dateOfBirthController.text =
+        "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}";
       });
     }
-  }
-
-  void _saveProfile() {
-    Navigator.pushNamed(context, "/home_page");
   }
 }
