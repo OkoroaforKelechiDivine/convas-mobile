@@ -16,14 +16,13 @@ class MessagingScreen extends StatefulWidget {
 class _MessagingScreenState extends State<MessagingScreen> {
   final List<Message> _messages = [];
   final TextEditingController _textController = TextEditingController();
-  late TokenProvider _tokenProvider;
-  late UserService _userService;
+  final tokenProvider = TokenProvider();
+  final userService = UserService();
 
   @override
   void initState() {
     super.initState();
-    _tokenProvider = TokenProvider();
-    _userService = UserService(_tokenProvider);
+
   }
 
   @override
@@ -98,9 +97,9 @@ class _MessagingScreenState extends State<MessagingScreen> {
   void _sendMessage(String text, {bool isMe = false}) async {
     if (text.isNotEmpty) {
       final newMessage = Message(text: text, isMe: isMe);
-      final senderId = _tokenProvider.getUserId();
+      final senderId = tokenProvider.userId;
       try {
-        await _userService.sendMessage(
+        await userService.sendMessage(
           senderId: senderId,
           receiverId: widget.user.id,
           content: text,

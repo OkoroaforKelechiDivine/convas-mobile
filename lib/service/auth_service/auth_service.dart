@@ -66,7 +66,7 @@ class AuthApiService {
       String profileImageUrl,
       BuildContext context,
       ) async {
-    final userId = context.read<TokenProvider>().getUserId();
+    final userId = context.read<TokenProvider>().userId;
     try {
       final response = await dio.post(
         '$baseUrl/profile/create/$userId',

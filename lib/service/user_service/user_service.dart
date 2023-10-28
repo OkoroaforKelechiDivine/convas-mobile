@@ -4,17 +4,20 @@ import 'package:safe_chat/service/token/TokenProvider.dart';
 import '../../model/user_model.dart';
 
 class UserService {
-  final Dio _dio;
-  final TokenProvider tokenProvider;
 
-  UserService(this.tokenProvider) : _dio = Dio();
+  final Dio _dio = Dio();
+  final tokenProvider = TokenProvider();
+
+  Options _getAuthOptions() {
+    final String token = tokenProvider.token;
+    return Options(headers: {'Authorization': 'Bearer $token'});
+  }
 
   Future<List<AppUser>> getAllUsers() async {
-    final String token = tokenProvider.getToken();
     try {
       final response = await _dio.get(
         'https://cyber-mind-deploy.onrender.com/api/users/all',
-        options: Options(headers: {'Authorization': 'Bearer $token'}),
+        options: _getAuthOptions(),
       );
 
       if (response.statusCode == 200) {
@@ -30,7 +33,6 @@ class UserService {
   }
 
   Future<void> followUser(String friendId, String userId) async {
-    final String token = tokenProvider.getToken();
     try {
       final response = await _dio.post(
         'https://cyber-mind-deploy.onrender.com/api/users/follow',
@@ -38,7 +40,7 @@ class UserService {
           'userId': userId,
           'friendId': friendId,
         },
-        options: Options(headers: {'Authorization': 'Bearer $token'}),
+        options: _getAuthOptions(),
       );
 
       if (response.statusCode == 200) {
@@ -58,7 +60,7 @@ class UserService {
     required String receiverId,
     required String content,
   }) async {
-    final String token = tokenProvider.getToken();
+    final String token = tokenProvider.token;
     try {
       final response = await _dio.post(
         'https://cyber-mind-deploy.onrender.com/api/chats/send-message',
@@ -67,7 +69,7 @@ class UserService {
           'receiverId': receiverId,
           'content': content,
         },
-        options: Options(headers: {'Authorization': 'Bearer $token'}),
+        options: _getAuthOptions(),
       );
       print("The chat message token is" + token);
 
@@ -86,6 +88,4 @@ class UserService {
       throw Exception('Failed to send message: $e');
     }
   }
-
-
 }

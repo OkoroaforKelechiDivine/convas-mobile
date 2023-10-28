@@ -16,14 +16,4 @@ class TokenProvider with ChangeNotifier {
     _userId = userId;
     notifyListeners();
   }
-
-  String getToken() {
-    return _token;
-  }
-
-  String getUserId() {
-    return _userId;
-  }
-
-
 }

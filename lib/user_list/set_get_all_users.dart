@@ -15,15 +15,13 @@ class GetAllUsersScreen extends StatefulWidget {
 }
 
 class _GetAllUsersScreenState extends State<GetAllUsersScreen> {
-  late UserService userService;
   List<AppUser> userList = [];
   File? _image;
+  final userService = UserService();
 
   @override
   void initState() {
     super.initState();
-    final tokenProvider = TokenProvider(); // You may need to create an instance of TokenProvider here
-    userService = UserService(tokenProvider);
     _fetchUsers();
   }
 
@@ -62,6 +60,8 @@ class _GetAllUsersScreenState extends State<GetAllUsersScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final tokenProvider = Provider.of<TokenProvider>(context, listen: false);
+    print("Token in GetAllUsersScreen: ${tokenProvider.token}");
     return Scaffold(
       appBar: AppBar(
         title: const Text('All Users'),
