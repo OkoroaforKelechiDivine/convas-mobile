@@ -11,6 +11,7 @@ class AppColors {
   static Color activeButton = HexColor.fromHex('#3D49B8');
   static Color green = HexColor.fromHex('#3DB86E');
   static Color grey = HexColor.fromHex('#848586');
+  static Color red = const Color.fromRGBO(242, 9, 9, 1.0);
 }
 
 extension HexColor on Color {

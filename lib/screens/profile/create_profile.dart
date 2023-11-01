@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 import 'package:safe_chat/appConfig/manager/theme_manager.dart';
-
-import '../../model/profile_model.dart';
-import '../../service/auth_service/auth_service.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String selectedGender;
@@ -68,7 +64,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               bottom: 0,
               right: 0,
               child: GestureDetector(
-                onTap: _getImage,
                 child: Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -149,81 +144,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           const SizedBox(height: 50),
           ElevatedButton(
-            onPressed: () async {
-              if (_validateForm()) {
-                setState(() {
-                  isLoading = true;
-                });
-                final profileDTO = ProfileDTO(
-                  username: userName!,
-                  dateOfBirth: dateOfBirth!,
-                  bio: lastName!,
-                  profileImageUrl: _image?.path ?? '',
-                  hobbies: emailAddress!,
-                );
-
-                final result = await AuthApiService.createProfile(
-                  profileDTO.username,
-                  profileDTO.dateOfBirth.toIso8601String(),
-                  profileDTO.bio,
-                  profileDTO.profileImageUrl,
-                  profileDTO.hobbies,
-                  context
-                );
-                if (result['success'] == true) {
-                  Future.delayed(const Duration(seconds: 1), () {
-                    Navigator.of(context).pushReplacementNamed('/login');
-                  });
-                } else {
-                  AuthApiService.showSnackBar(context, result['message']);
-                }
-                setState(() {
-                  isLoading = false;
-                });
-              }
-            },
+            onPressed: () {},
             child: isLoading ? CircularProgressIndicator(color: AppColors.activeButton) : const Text('Complete'),
           )
         ],
       ),
     );
-  }
-
-  bool _validateForm() {
-    if (userName == null || userName!.isEmpty) {
-      AuthApiService.showSnackBar(context, 'Username is required');
-      return false;
-    }
-
-    if (dateOfBirth == null) {
-      AuthApiService.showSnackBar(context, 'Date of Birth is required');
-      return false;
-    }
-
-    if (lastName == null || lastName!.isEmpty) {
-      AuthApiService.showSnackBar(context, 'Bio is required');
-      return false;
-    }
-
-    if (emailAddress == null || emailAddress!.isEmpty) {
-      AuthApiService.showSnackBar(context, 'Hobbies is required');
-      return false;
-    }
-
-    return true;
-  }
-
-  void _getImage() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
   }
 
   void _viewImage() {

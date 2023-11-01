@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:safe_chat/appConfig/manager/theme_manager.dart';
 import '../../appConfig/manager/font_manager.dart';
-import '../../service/auth_service/auth_service.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -27,9 +26,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _passwordError = '';
   String _confirmPasswordError = '';
   String? _selectedGender;
-  String _responseError = ''; // Store response error message
+  String _responseError = '';
 
-  final List<String> _genderOptions = ['Male', 'Female', 'Other'];
+  final List<String> _genderOptions = ['Male', 'Female', 'Others'];
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 const SizedBox(height: 50),
-                _buildSafeChatLogo(),
+                _buildLogo(),
                 const SizedBox(height: 50),
                 Align(
                   alignment: Alignment.centerLeft,
@@ -107,7 +106,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Text(
                     _responseError,
                     style: TextStyle(
-                      color: Colors.red,
+                      color: AppColors.red,
                       fontSize: AppFontSize.s16,
                     ),
                   ),
@@ -121,17 +120,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  Widget _buildSafeChatLogo() {
+  Widget _buildLogo() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
-          'SafeChat',
+          'Convas',
           style: TextStyle(fontSize: AppFontSize.s20),
         ),
+        const SizedBox(width: 2),
         Image.asset(
           'assets/jpg/safeChatWhiteLogo.jpg',
-          height: 40,
+          height: 25,
         ),
       ],
     );
@@ -177,8 +177,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
         errorText: errorText.isNotEmpty ? errorText : null,
         enabled: !_isLoading,
-        suffixIcon: isPassword
-            ? IconButton(
+        suffixIcon: isPassword ? IconButton(
           icon: Icon(
             obscureText ? Icons.visibility_off : Icons.visibility,
           ),
@@ -216,9 +215,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             );
           }).toList(),
           decoration: InputDecoration(
-            hintText: _selectedGender == null
-                ? 'Select Gender'
-                : null, // Show the hint text when _selectedGender is null
+            hintText: _selectedGender == null ? 'Select Gender' : null,
             hintStyle: TextStyle(color: AppColors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(
@@ -250,7 +247,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       _passwordError = '';
       _confirmPasswordError = '';
       _isLoading = true;
-      _responseError = ''; // Clear previous response error
+      _responseError = '';
     });
 
     if (firstName.isEmpty) {
@@ -302,15 +299,5 @@ class _SignUpScreenState extends State<SignUpScreen> {
       });
       return;
     }
-
-    final response = await AuthApiService.registerUser(
-      context: context,
-      firstName: firstName,
-      lastName: lastName,
-      gender: gender!,
-      email: email,
-      password: password,
-    );
-    print(response);
   }
 }

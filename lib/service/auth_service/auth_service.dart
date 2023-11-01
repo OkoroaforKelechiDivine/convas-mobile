@@ -1,132 +1,46 @@
-import 'dart:js';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:provider/provider.dart';
 
-import '../token/TokenProvider.dart';
+import '../../controllers/constant/api_constants.dart';
+
 
 class AuthApiService {
-  static final Dio dio = Dio();
-  static const String baseUrl = 'https://cyber-mind-deploy.onrender.com/api';
+  final Dio _dio = Dio();
 
-  static Future<Map<String, dynamic>> registerUser({
+  Future<Map<String, dynamic>> registerUser({
+    required String email,
+    required String password,
     required String firstName,
     required String lastName,
-    required String email,
     required String gender,
-    required String password,
-    required BuildContext context,
+
   }) async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      throw Exception('No internet connection');
+    }
+
     try {
-      final connectivityResult = await Connectivity().checkConnectivity();
-      if (connectivityResult == ConnectivityResult.none) {
-        return {
-          'success': false,
-          'message': 'Network problem. Please check your internet connection.',
-        };
-      }
-
-      final capitalizedGender = gender.toUpperCase();
-
-      final response = await dio.post(
-        '$baseUrl/auths/create',
+      final response = await _dio.post(
+        ApiConstants.registerUserEndpoint(),
         data: {
-          'firstName': firstName,
-          'lastName': lastName,
           'email': email,
-          'gender': capitalizedGender,
           'password': password,
+          'firstName' : firstName,
+          'lastName' : lastName,
+          'gender' : gender
         },
       );
 
       if (response.statusCode == 201) {
-        final userId = response.data['id'];
-        context.read<TokenProvider>().setUserId(userId);
-        Future.delayed(const Duration(seconds: 1), () {
-          Navigator.of(context).pushReplacementNamed('/create_profile');
-        });
-        return {'success': true};
+        return response.data;
       } else if (response.statusCode == 409) {
-        return {'success': false, 'message': 'User with that email already exists'};
+        throw Exception('User with this email already exists');
       } else {
-        return {'success': false, 'message': 'An error occurred. Please try again later.'};
+        throw Exception('User creation failed');
       }
-    } catch (e) {
-      return {'success': false, 'message': 'An error occurred. Please try again later.'};
+    } catch (error) {
+      throw Exception('Failed to register user: $error');
     }
-  }
-
-  static Future<Map<String, dynamic>> createProfile(
-      String username,
-      String bio,
-      String hobbies,
-      String dateOfBirth,
-      String profileImageUrl,
-      BuildContext context,
-      ) async {
-    final userId = context.read<TokenProvider>().userId;
-    try {
-      final response = await dio.post(
-        '$baseUrl/profile/create/$userId',
-        data: {
-          'username': username,
-          'bio': bio,
-          'hobbies': hobbies,
-          'dateOfBirth': dateOfBirth,
-          'profileImageUrl': profileImageUrl
-        },
-      );
-
-      if (response.statusCode == 200) {
-        return {'success': true};
-      } else {
-        return {'success': false, 'message': 'Error creating user profile.'};
-      }
-    } catch (e) {
-      return {'success': false, 'message': 'An error occurred. Please try again later.'};
-    }
-  }
-
-  static Future<void> loginUser({
-    required String email,
-    required String password,
-    required BuildContext context,
-  }) async {
-    final connectivityResult = await Connectivity().checkConnectivity();
-    if (connectivityResult == ConnectivityResult.none) {
-      showSnackBar(context, "Network problem. Please check your internet connection.");
-      return;
-    }
-    try {
-      final response = await dio.post(
-        '$baseUrl/auths/login',
-        data: {
-          'email': email,
-          'password': password,
-        },
-      );
-
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> responseData = response.data;
-        final String token = responseData['data']['token'];
-        print("this is the token" + token);
-        Future.delayed(const Duration(seconds: 1), () {
-          Navigator.of(context).pushReplacementNamed('/get_all_users');
-        });
-        context.read<TokenProvider>().setToken(token);
-      }
-    } catch (e) {
-      showSnackBar(context, "Incorrect Email and Password.");
-    }
-  }
-
-  static void showSnackBar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
   }
 }

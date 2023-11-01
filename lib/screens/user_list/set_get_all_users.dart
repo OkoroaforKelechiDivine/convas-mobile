@@ -1,11 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../model/user_model.dart';
-import '../screens/chat/set_chat.dart';
-import '../screens/profile/profile_details.dart';
-import '../service/token/TokenProvider.dart';
-import '../service/user_service/user_service.dart';
+import '../../model/user_model.dart';
+import '../../service/token/TokenProvider.dart';
+import '../../service/user_service/user_service.dart';
+import '../chat/set_chat.dart';
 
 class GetAllUsersScreen extends StatefulWidget {
   const GetAllUsersScreen({Key? key}) : super(key: key);
@@ -36,17 +35,6 @@ class _GetAllUsersScreenState extends State<GetAllUsersScreen> {
     }
   }
 
-  // void _navigateToUserProfile(AppUser user) {
-    // Navigator.of(context).push(
-      // MaterialPageRoute(
-      //   builder: (context) {
-      //     final tokenProvider = Provider.of<TokenProvider>(context, listen: false);
-      //     return ProfileDetailsScreen(user: user, tokenProvider: tokenProvider);
-      //   },
-      // ),
-    // );
-  // }
-
   void _navigateToChatMessage(AppUser user) {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -56,7 +44,6 @@ class _GetAllUsersScreenState extends State<GetAllUsersScreen> {
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {

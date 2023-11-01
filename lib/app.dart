@@ -12,8 +12,8 @@ import 'package:safe_chat/screens/profile/create_profile.dart';
 import 'package:safe_chat/screens/reset_password/set_reset_password.dart';
 import 'package:safe_chat/screens/signup/sign_up.dart';
 import 'package:safe_chat/screens/splash/splash_screen.dart';
+import 'package:safe_chat/screens/user_list/set_get_all_users.dart';
 import 'package:safe_chat/screens/verify_code/set_verify_code.dart';
-import 'package:safe_chat/user_list/set_get_all_users.dart';
 
 import 'appConfig/manager/theme_manager.dart';
 
