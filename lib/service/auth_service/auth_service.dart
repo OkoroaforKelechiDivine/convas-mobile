@@ -1,46 +1,41 @@
-import 'package:dio/dio.dart';
-import 'package:connectivity/connectivity.dart';
-
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
 import '../../controllers/constant/api_constants.dart';
 
-
 class AuthApiService {
-  final Dio _dio = Dio();
-
   Future<Map<String, dynamic>> registerUser({
-    required String email,
-    required String password,
     required String firstName,
     required String lastName,
-    required String gender,
-
+    required String password,
+    required String email,
+    required BuildContext context,
   }) async {
-    var connectivityResult = await Connectivity().checkConnectivity();
-    if (connectivityResult == ConnectivityResult.none) {
-      throw Exception('No internet connection');
-    }
+    final registerEndpoint = ApiConstants.registerUserEndpoint();
 
-    try {
-      final response = await _dio.post(
-        ApiConstants.registerUserEndpoint(),
-        data: {
-          'email': email,
-          'password': password,
-          'firstName' : firstName,
-          'lastName' : lastName,
-          'gender' : gender
-        },
-      );
+    final registrationData = {
+      'firstName': firstName,
+      'lastName': lastName,
+      'password': password,
+      'email': email,
+    };
 
-      if (response.statusCode == 201) {
-        return response.data;
-      } else if (response.statusCode == 409) {
-        throw Exception('User with this email already exists');
-      } else {
-        throw Exception('User creation failed');
-      }
-    } catch (error) {
-      throw Exception('Failed to register user: $error');
+    final response = await http.post(
+      Uri.parse(registerEndpoint),
+      body: jsonEncode(registrationData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 201) {
+      Navigator.pushNamed(context, '/create_profile');
+      final responseData = json.decode(response.body);
+      return {'data': responseData, 'error': null};
+    } else if (response.statusCode == 409) {
+      return {'data': null, 'error': "User with this email already exists"};
+    } else {
+      return {'data': null, 'error': "User creation failed"};
     }
   }
 }

@@ -1,303 +1,200 @@
 import 'package:flutter/material.dart';
-import 'package:safe_chat/appConfig/manager/theme_manager.dart';
 import '../../appConfig/manager/font_manager.dart';
+import '../../appConfig/manager/theme_manager.dart';
+import '../../service/auth_service/auth_service.dart';
+import '../../service/validation/field_validation.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+  const SignUpScreen({super.key});
 
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  bool _isLoading = false;
-  bool _obscurePassword = true;
-  bool _obscureConfirmPassword = true;
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final AuthApiService apiService = AuthApiService();
 
-  final TextEditingController _confirmPassword = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
+  bool isBusy = false;
+  String firstNameError = '';
+  String lastNameError = '';
+  String emailError = '';
+  String passwordError = '';
+  String registrationError = '';
 
-  String _firstNameError = '';
-  String _lastNameError = '';
-  String _emailError = '';
-  String _passwordError = '';
-  String _confirmPasswordError = '';
-  String? _selectedGender;
-  String _responseError = '';
+  bool obscurePassword = true;
 
-  final List<String> _genderOptions = ['Male', 'Female', 'Others'];
+  Future<void> signUp() async {
+    clearErrors();
+
+    if (validateField(firstNameController, (error) => firstNameError = error) ||
+        validateField(lastNameController, (error) => lastNameError = error) ||
+        validateEmail(emailController) ||
+        validatePassword(passwordController)) {
+      return;
+    }
+
+    setState(() {
+      isBusy = true;
+    });
+
+    final result = await apiService.registerUser(
+      context: context,
+      firstName: firstNameController.text,
+      lastName: lastNameController.text,
+      email: emailController.text,
+      password: passwordController.text,
+    );
+
+    setState(() {
+      isBusy = false;
+      if (result['error'] != null) {
+        registrationError = result['error'];
+      }
+    });
+  }
+
+  void clearErrors() {
+    setState(() {
+      firstNameError = '';
+      lastNameError = '';
+      emailError = '';
+      passwordError = '';
+      registrationError = '';
+    });
+  }
+
+  bool validateField(TextEditingController controller, void Function(String) onError) {
+    final value = controller.text;
+    if (FieldValidation.isFieldEmpty(value)) {
+      onError('Field cannot be empty');
+      return true;
+    }
+    return false;
+  }
+
+  bool validateEmail(TextEditingController controller) {
+    final email = controller.text;
+    if (!FieldValidation.isEmailValid(email)) {
+      setState(() {
+        emailError = 'Invalid email format';
+      });
+      return true;
+    }
+    return false;
+  }
+
+  bool validatePassword(TextEditingController controller) {
+    final password = controller.text;
+    if (!FieldValidation.isPasswordStrong(password)) {
+      setState(() {
+        passwordError = 'Password must be at least 8 characters and contain letters, digits, and special characters.';
+      });
+      return true;
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      appBar: AppBar(),
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                const SizedBox(height: 50),
-                _buildLogo(),
-                const SizedBox(height: 50),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Center(
-                    child: Text(
-                      'Sign Up',
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 30),
+              RichText(
+                text: TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'Welcome to ',
                       style: TextStyle(
                         fontSize: AppFontSize.s20,
-                        color: AppColors.activeButton,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.blackColor,
                       ),
                     ),
-                  ),
+                    TextSpan(
+                      text: "Convas",
+                      style: TextStyle(
+                        fontSize: AppFontSize.s20,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.activeButton,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 20),
-                _buildInputField(
-                  label: 'First Name',
-                  hint: 'First Name',
-                  controller: _firstNameController,
-                  errorText: _firstNameError,
-                ),
-                _buildInputField(
-                  hint: 'Last Name',
-                  label: 'Last Name',
-                  controller: _lastNameController,
-                  errorText: _lastNameError,
-                ),
-                _buildInputField(
-                  hint: 'Email',
-                  label: 'Email',
-                  controller: _emailController,
-                  errorText: _emailError,
-                ),
-                _buildInputField(
-                  label: 'Password',
-                  hint: 'Mypassword123@#',
-                  controller: _passwordController,
-                  isPassword: true,
-                  obscureText: _obscurePassword,
-                  toggleVisibility: () {
-                    setState(() {
-                      _obscurePassword = !_obscurePassword;
-                    });
-                  },
-                  errorText: _passwordError,
-                ),
-                _buildInputField(
-                  label: 'Confirm Password',
-                  hint: 'Confirm Password',
-                  controller: _confirmPassword,
-                  isPassword: true,
-                  obscureText: _obscureConfirmPassword,
-                  toggleVisibility: () {
-                    setState(() {
-                      _obscureConfirmPassword = !_obscureConfirmPassword;
-                    });
-                  },
-                  errorText: _confirmPasswordError,
-                ),
-                _buildGenderDropdown(),
-                if (_responseError.isNotEmpty)
-                  Text(
-                    _responseError,
-                    style: TextStyle(
-                      color: AppColors.red,
-                      fontSize: AppFontSize.s16,
+              ),
+              const SizedBox(height: 70),
+              _buildTextField(firstNameController, 'First Name', firstNameError),
+              _buildTextField(lastNameController, 'Last Name', lastNameError),
+              _buildTextField(emailController, 'Email', emailError),
+              _buildTextField(passwordController, 'Password', passwordError, isPassword: true),
+              if (registrationError.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 40),
+                  child: Text(
+                    registrationError,
+                    style: const TextStyle(
+                      color: Colors.red,
                     ),
                   ),
-                const SizedBox(height: 60),
-                _buildSignUpButton(context),
-              ],
-            ),
+                ),
+              const SizedBox(height: 10),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: isBusy ? null : signUp,
+                    child: const Text('Create account'),
+                  ),
+                  if (isBusy) CircularProgressIndicator(color: AppColors.activeButton),
+                ],
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _buildLogo() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(
-          'Convas',
-          style: TextStyle(fontSize: AppFontSize.s20),
-        ),
-        const SizedBox(width: 2),
-        Image.asset(
-          'assets/jpg/safeChatWhiteLogo.jpg',
-          height: 25,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildInputField({
-    required String label,
-    required String hint,
-    required TextEditingController controller,
-    bool isPassword = false,
-    bool obscureText = false,
-    VoidCallback? toggleVisibility,
-    required String errorText,
-  }) {
-    return TextFormField(
-      controller: controller,
-      style: TextStyle(color: AppColors.blackColor),
-      obscureText: obscureText,
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: hint,
-        hintStyle: TextStyle(color: AppColors.grey),
-        labelStyle: TextStyle(color: AppColors.grey),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.green,
+  Widget _buildTextField(TextEditingController controller, String labelText, String error, {bool isPassword = false}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Stack(
+        children: [
+          TextField(
+            controller: controller,
+            decoration: InputDecoration(
+              labelText: labelText,
+              contentPadding: EdgeInsets.zero,
+              border: const UnderlineInputBorder(),
+              errorText: error.isEmpty ? null : error,
+            ),
+            obscureText: isPassword && !obscurePassword,
           ),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.green,
-          ),
-        ),
-        errorBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.grey,
-          ),
-        ),
-        focusedErrorBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.grey,
-          ),
-        ),
-        errorText: errorText.isNotEmpty ? errorText : null,
-        enabled: !_isLoading,
-        suffixIcon: isPassword ? IconButton(
-          icon: Icon(
-            obscureText ? Icons.visibility_off : Icons.visibility,
-          ),
-          onPressed: toggleVisibility,
-        )
-            : null,
+          if (isPassword)
+            Positioned(
+              right: 0,
+              bottom: 8,
+              child: IconButton(
+                icon: Icon(obscurePassword ? Icons.visibility : Icons.visibility_off),
+                onPressed: () {
+                  setState(() {
+                    obscurePassword = !obscurePassword;
+                  });
+                },
+              ),
+            ),
+        ],
       ),
     );
-  }
-
-  Widget _buildSignUpButton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: _isLoading ? null : _performSignUp,
-      child: _isLoading
-          ? CircularProgressIndicator(color: AppColors.activeButton)
-          : const Text('Sign Up'),
-    );
-  }
-
-  Widget _buildGenderDropdown() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        DropdownButtonFormField<String>(
-          value: _selectedGender,
-          onChanged: (String? newValue) {
-            setState(() {
-              _selectedGender = newValue;
-            });
-          },
-          items: _genderOptions.map((String gender) {
-            return DropdownMenuItem<String>(
-              value: gender,
-              child: Text(gender),
-            );
-          }).toList(),
-          decoration: InputDecoration(
-            hintText: _selectedGender == null ? 'Select Gender' : null,
-            hintStyle: TextStyle(color: AppColors.grey),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors.green,
-              ),
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors.green,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  void _performSignUp() async {
-    final firstName = _firstNameController.text;
-    final lastName = _lastNameController.text;
-    final email = _emailController.text;
-    final password = _passwordController.text;
-    final gender = _selectedGender;
-
-    setState(() {
-      _firstNameError = '';
-      _lastNameError = '';
-      _emailError = '';
-      _passwordError = '';
-      _confirmPasswordError = '';
-      _isLoading = true;
-      _responseError = '';
-    });
-
-    if (firstName.isEmpty) {
-      setState(() {
-        _firstNameError = 'First name cannot be empty';
-        _isLoading = false;
-      });
-      return;
-    }
-
-    if (lastName.isEmpty) {
-      setState(() {
-        _lastNameError = 'Last name cannot be empty';
-        _isLoading = false;
-      });
-      return;
-    }
-
-    if (email.isEmpty) {
-      setState(() {
-        _emailError = 'Email cannot be empty';
-        _isLoading = false;
-      });
-      return;
-    }
-
-    if (!RegExp(
-        r"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,}$")
-        .hasMatch(password)) {
-      setState(() {
-        _passwordError = 'Password is weak';
-        _isLoading = false;
-      });
-      return;
-    }
-
-    if (!RegExp(r"^[A-Za-z0-9+_.-]+@(.+)$").hasMatch(email)) {
-      setState(() {
-        _emailError = 'Invalid email address';
-        _isLoading = false;
-      });
-      return;
-    }
-
-    if (password != _confirmPassword.text) {
-      setState(() {
-        _confirmPasswordError = 'Passwords do not match';
-        _isLoading = false;
-      });
-      return;
-    }
   }
 }
