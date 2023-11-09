@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:safe_chat/appConfig/manager/font_manager.dart';
+import 'package:safe_chat/widget/logo.dart';
 
 class InfoTwoScreen extends StatelessWidget {
   const InfoTwoScreen({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class InfoTwoScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _buildSafeChatLogo(),
+                const SafeChatLogo(),
                 const SizedBox(height: 50),
                 _buildImage(),
                 const SizedBox(height: 20),
@@ -28,22 +29,6 @@ class InfoTwoScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildSafeChatLogo() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(
-          'SafeChat',
-          style: TextStyle(fontSize: AppFontSize.s20),
-        ),
-        Image.asset(
-          'assets/jpg/safeChatWhiteLogo.jpg',
-          height: 40,
-        ),
-      ],
     );
   }
 
@@ -87,5 +72,4 @@ class InfoTwoScreen extends StatelessWidget {
       child: const Text('Get Started'),
     );
   }
-
 }

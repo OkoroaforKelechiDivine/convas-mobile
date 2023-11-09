@@ -16,7 +16,7 @@ class SafeChatLogo extends StatelessWidget {
         const SizedBox(width: 2),
         Image.asset(
           'assets/jpg/safeChatWhiteLogo.jpg',
-          height: 20,
+          height: AppFontSize.s24,
         ),
       ],
     );
