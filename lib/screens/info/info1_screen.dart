@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safe_chat/appConfig/manager/font_manager.dart';
 
 import '../../appConfig/manager/theme_manager.dart';
+import '../../widget/logo.dart';
 
 class InfoOneScreen extends StatelessWidget {
   const InfoOneScreen({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class InfoOneScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _buildSafeChatLogo(),
+                const SafeChatLogo(),
                 const SizedBox(height: 50),
                 _buildImage(),
                 const SizedBox(height: 100),
@@ -27,22 +28,6 @@ class InfoOneScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildSafeChatLogo() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(
-          'SafeChat',
-          style: TextStyle(fontSize: AppFontSize.s20),
-        ),
-        Image.asset(
-          'assets/jpg/safeChatWhiteLogo.jpg',
-          height: 40,
-        ),
-      ],
     );
   }
 
