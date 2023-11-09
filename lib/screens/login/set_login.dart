@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safe_chat/appConfig/manager/theme_manager.dart';
 
 import '../../appConfig/manager/font_manager.dart';
-import '../../service/auth_service/auth_service.dart';
+import '../../widget/logo.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                _buildSafeChatLogo(),
+                const SafeChatLogo(),
                 const SizedBox(height: 50),
                 Align(
                   alignment: Alignment.centerLeft,
@@ -62,22 +62,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildSafeChatLogo() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(
-          'SafeChat',
-          style: TextStyle(fontSize: AppFontSize.s20),
-        ),
-        Image.asset(
-          'assets/jpg/safeChatWhiteLogo.jpg',
-          height: 40,
-        ),
-      ],
-    );
-  }
-
   Widget _buildEmailField() {
     return TextFormField(
       controller: _emailController,
@@ -87,12 +71,12 @@ class _LoginScreenState extends State<LoginScreen> {
         labelStyle: TextStyle(color: AppColors.grey),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: _emailError ? Colors.red : AppColors.grey,
+            color: _emailError ? AppColors.red : AppColors.grey,
           ),
         ),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: _emailError ? Colors.red : AppColors.grey,
+            color: _emailError ? AppColors.red : AppColors.grey,
           ),
         ),
         errorBorder: UnderlineInputBorder(
@@ -120,12 +104,12 @@ class _LoginScreenState extends State<LoginScreen> {
         labelStyle: TextStyle(color: AppColors.grey),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: _passwordError ? Colors.red : AppColors.grey,
+            color: _passwordError ? AppColors.red : AppColors.grey,
           ),
         ),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: _passwordError ? Colors.red : AppColors.grey,
+            color: _passwordError ? AppColors.red : AppColors.grey,
           ),
         ),
         errorBorder: UnderlineInputBorder(
