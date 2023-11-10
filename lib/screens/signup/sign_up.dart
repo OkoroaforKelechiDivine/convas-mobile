@@ -29,7 +29,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future<void> signUp() async {
     clearErrors();
-
     if (validateField(firstNameController, (error) => firstNameError = error) ||
         validateField(lastNameController, (error) => lastNameError = error) ||
         validateEmail(emailController) ||

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:safe_chat/appConfig/manager/font_manager.dart';
 
-import '../../service/auth_service/auth_service.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
