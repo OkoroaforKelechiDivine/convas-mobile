@@ -27,8 +27,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SafeChat',
       theme: getApplicationTheme(),
-      home: const SplashScreen(),
+      initialRoute: "/",
       routes: {
+        "/": (context) => const SplashScreen(),
         "/home": (context) => const AuthScreen(),
         "/info1": (context) => const InfoOneScreen(),
         "/info2": (context) => const InfoTwoScreen(),

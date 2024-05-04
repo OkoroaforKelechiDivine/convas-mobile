@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../model/message.dart';
 import '../../../model/user_model.dart';
+import '../../model/repository/message.dart';
 
 class MessagingScreen extends StatefulWidget {
   final AppUser user;

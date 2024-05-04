@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:safe_chat/assets_global/assets_export.dart';
 
 import '../../presenter/service/splash/splash_controller.dart';
 
-
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
-
-  Widget _buildLogoImage() {
-    return Center(
-      child: Image.asset(
-        'assets/jpg/safeChatWhiteLogo.jpg',
-        height: 500,
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +14,11 @@ class SplashScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _buildLogoImage(),
+          Center(
+            child: Image.asset(AssetsImageExport.splashLogo,
+              height: 500,
+            ),
+          ),
         ],
       ),
     );
