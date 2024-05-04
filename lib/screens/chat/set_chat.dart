@@ -39,14 +39,14 @@ class _MessagingScreenState extends State<MessagingScreen> {
                     ),
                     child: Text(
                       message.text,
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ),
                 );
               },
             ),
           ),
-          Divider(height: 1),
+          const Divider(height: 1),
           _buildMessageInputField(),
         ],
       ),
@@ -55,7 +55,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
 
   Widget _buildMessageInputField() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       child: Row(
@@ -77,7 +77,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
             onPressed: () {
               _sendMessage(_textController.text, isMe: true);
             },
-            icon: Icon(Icons.send),
+            icon: const Icon(Icons.send),
           ),
         ],
       ),
