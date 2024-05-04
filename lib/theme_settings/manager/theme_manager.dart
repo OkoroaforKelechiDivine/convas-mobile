@@ -4,7 +4,6 @@ import 'package:safe_chat/theme_settings/manager/style_manager.dart';
 import 'font_manager.dart';
 
 class AppColors {
-  // static Color appBackgroundColor = HexColor.fromHex('#FFF');
   static Color white = Colors.white;
   static Color blackColor = const Color.fromRGBO(0, 0, 0, 1);
   static Color activeButton = HexColor.fromHex('#3D49B8');

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:safe_chat/assets_global/assets_export.dart';
+import 'package:safe_chat/assets_global/exports.dart';
 
 import '../../presenter/service/splash/splash_controller.dart';
 
