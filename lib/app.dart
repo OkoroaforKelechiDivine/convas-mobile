@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
-import 'package:safe_chat/check_mail/set_check_mail.dart';
-import 'package:safe_chat/screens/auth/auth.dart';
-import 'package:safe_chat/screens/forgot_password/set_forgot_password.dart';
-import 'package:safe_chat/screens/home_page/set_home_page.dart';
-import 'package:safe_chat/screens/info/info2_screen.dart';
-import 'package:safe_chat/screens/info/info1_screen.dart';
-import 'package:safe_chat/screens/login/set_login.dart';
-import 'package:safe_chat/screens/profile/create_profile.dart';
-import 'package:safe_chat/screens/reset_password/set_reset_password.dart';
-import 'package:safe_chat/screens/signup/sign_up.dart';
-import 'package:safe_chat/screens/splash/splash_screen.dart';
-import 'package:safe_chat/screens/verify_code/set_verify_code.dart';
-import 'package:safe_chat/user_list/set_get_all_users.dart';
-
-import 'appConfig/manager/theme_manager.dart';
+import 'package:safe_chat/theme_settings/manager/theme_manager.dart';
+import 'package:safe_chat/views/auth/auth.dart';
+import 'package:safe_chat/views/check_mail/set_check_mail.dart';
+import 'package:safe_chat/views/forgot_password/set_forgot_password.dart';
+import 'package:safe_chat/views/home_page/set_home_page.dart';
+import 'package:safe_chat/views/info/info1_screen.dart';
+import 'package:safe_chat/views/info/info2_screen.dart';
+import 'package:safe_chat/views/login/set_login.dart';
+import 'package:safe_chat/views/profile/create_profile.dart';
+import 'package:safe_chat/views/reset_password/set_reset_password.dart';
+import 'package:safe_chat/views/signup/sign_up.dart';
+import 'package:safe_chat/views/splash/splash_screen.dart';
+import 'package:safe_chat/views/user_list/set_get_all_users.dart';
+import 'package:safe_chat/views/verify_code/set_verify_code.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
