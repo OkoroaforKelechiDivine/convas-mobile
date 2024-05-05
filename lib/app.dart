@@ -6,8 +6,6 @@ import 'package:safe_chat/views/auth/auth.dart';
 import 'package:safe_chat/views/check_mail/set_check_mail.dart';
 import 'package:safe_chat/views/forgot_password/set_forgot_password.dart';
 import 'package:safe_chat/views/home_page/set_home_page.dart';
-import 'package:safe_chat/views/info/info1_screen.dart';
-import 'package:safe_chat/views/info/info2_screen.dart';
 import 'package:safe_chat/views/login/set_login.dart';
 import 'package:safe_chat/views/profile/create_profile.dart';
 import 'package:safe_chat/views/reset_password/set_reset_password.dart';
@@ -15,6 +13,7 @@ import 'package:safe_chat/views/signup/sign_up.dart';
 import 'package:safe_chat/views/splash/splash_screen.dart';
 import 'package:safe_chat/views/user_list/set_get_all_users.dart';
 import 'package:safe_chat/views/verify_code/set_verify_code.dart';
+import 'package:safe_chat/views/welcome/welcome_view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -31,8 +30,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => const SplashScreen(),
         "/home": (context) => const AuthScreen(),
-        "/info1": (context) => const InfoOneScreen(),
-        "/info2": (context) => const InfoTwoScreen(),
+        "/info1": (context) => const WelcomeView(),
         "/login": (context) => const LoginScreen(),
         "/sign_up": (context) => const SignUpScreen(),
         "/forget-password": (context) => const ForgotPasswordScreen(),

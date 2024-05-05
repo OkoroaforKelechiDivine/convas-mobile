@@ -30,7 +30,7 @@ ThemeData _appTheme = ThemeData(
       labelSmall: getButtonLabelStyle(color: AppColors.blackColor)
   ),
   scaffoldBackgroundColor: AppColors.white,
-  appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent, elevation: 0),
+  appBarTheme: AppBarTheme(backgroundColor: AppColors.white, elevation: 0),
   textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: AppColors.green,
@@ -38,17 +38,25 @@ ThemeData _appTheme = ThemeData(
             color: AppColors.green,
             fontSize: AppFontSize.s14
         ),
-      )),
+      )
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        fixedSize: const Size(500, 50),
-        backgroundColor: AppColors.activeButton,
-        foregroundColor: AppColors.white,
-        textStyle: getBodySmallStyle(
-            color: AppColors.white,
-            fontSize: AppFontSize.s14
+    style: ElevatedButton.styleFrom(
+      fixedSize: const Size(500, 50),
+      backgroundColor: AppColors.white,
+      foregroundColor: AppColors.blackColor,
+      textStyle: getBodySmallStyle(
+        color: AppColors.white,
+        fontSize: AppFontSize.s14,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+        side: BorderSide(
+          color: AppColors.blackColor,
         ),
-      )),
+      ),
+    ),
+  ),
   inputDecorationTheme: InputDecorationTheme(
       hintStyle: getBodySmallStyle(
           color: AppColors.white,

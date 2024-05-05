@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:safe_chat/assets_global/exports.dart';
 
-import '../../presenter/service/splash/splash_controller.dart';
+import '../../model/service/splash/splash_controller.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
