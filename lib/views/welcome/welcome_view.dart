@@ -32,11 +32,12 @@ class WelcomeView extends StatelessWidget {
                   IntroContent(
                     title: "About Us",
                     subtitle:
-                    "SafeChat stands as your steadfast protector in the vast expanse of social media, tirelessly working to safeguard your online experience. "
-                        "With a primary mission of ensuring your digital journey remains unscathed, SafeChat employs sophisticated computer programs to meticulously "
-                        "scrutinize each link that appears on your social media feed. Through its unwavering vigilance, SafeChat sifts through the endless stream of content, "
-                        "ever on the lookout for any signs of potential danger or malicious intent. And should it detect even the slightest hint of a threat, SafeChat springs "
-                        "into action without hesitation, swiftly neutralizing any harmful links to shield you from harm.",
+                    "SafeChat serves as your reliable guardian amidst the vast landscape of social media, tirelessly dedicated to preserving"
+                        " your online safety. With its primary goal being the protection of your digital journey, SafeChat utilizes advanced computer "
+                        "algorithms to thoroughly examine each link that surfaces on your social media feed. Through its constant vigilance, SafeChat meticulously"
+                        " evaluates the endless flow of content, always on alert for any signs of potential threats or harmful intentions. Should it detect even the "
+                        "faintest indication of danger, SafeChat swiftly springs into action, promptly removing any risky links to shield you from harm. In essence, SafeChat is your "
+                        "steadfast companion, ensuring that your online experience remains secure and worry-free",
                   ),
                 ],
               ),
