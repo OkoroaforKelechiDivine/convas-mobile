@@ -15,6 +15,8 @@ dependencies:
   get: ^4.6.5
   font_awesome_flutter:
   dio:
+  video_player:
+  carousel_slider:
   connectivity:
   provider:
   jwt_decode:
@@ -30,4 +32,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/jpg/
+    - assets/icons/
+    - assets/images/png/
+    - assets/images/jpg/
+    - assets/images/svg/
+    - assets/images/gif/

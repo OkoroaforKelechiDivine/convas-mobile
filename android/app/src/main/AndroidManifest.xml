@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+<!--    Icon-App-20x20@1x.png-->
     <application
-        android:label="safe_chat"
+        android:label="SafeChat"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
