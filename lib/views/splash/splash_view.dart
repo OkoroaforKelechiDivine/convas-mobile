@@ -4,8 +4,8 @@ import 'package:safe_chat/assets_global/exports.dart';
 
 import '../../model/service/splash/splash_controller.dart';
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+class SplashView extends StatelessWidget {
+  const SplashView({super.key});
 
   @override
   Widget build(BuildContext context) {

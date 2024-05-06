@@ -52,7 +52,9 @@ class WelcomeView extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/create_account');
+                    },
                     child: const Text(
                       'Create Account',
                       style: TextStyle(fontWeight: AppFontWeight.bold),
