@@ -27,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_sharp),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pushReplacementNamed('/verify_code');
           },
         ),
       ),
@@ -47,7 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: const EdgeInsets.all(20),
         child: ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pushReplacementNamed('');
+            Navigator.of(context).pushReplacementNamed('/home_page');
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.blackColor

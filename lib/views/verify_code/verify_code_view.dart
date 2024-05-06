@@ -38,7 +38,7 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_sharp),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pushReplacementNamed('/create_account');
           },
         ),
       ),

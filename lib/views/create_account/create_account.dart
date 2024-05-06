@@ -24,7 +24,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_sharp),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pushReplacementNamed('/info1');
           },
         ),
       ),
