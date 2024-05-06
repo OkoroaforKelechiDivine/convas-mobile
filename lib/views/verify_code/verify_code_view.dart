@@ -90,7 +90,7 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
         padding: const EdgeInsets.all(20),
         child: ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/verify_code');
+            Navigator.of(context).pushReplacementNamed('/create_profile');
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.blackColor

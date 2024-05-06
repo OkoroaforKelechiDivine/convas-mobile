@@ -110,7 +110,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: AbsorbPointer(
               child: TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'Date of Birth', // Change the label
+                  labelText: 'Date of Birth',
                   enabledBorder: greenUnderline,
                   focusedBorder: greenUnderline,
                 ),
@@ -154,7 +154,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-
 
   void _getImage() async {
     final picker = ImagePicker();
