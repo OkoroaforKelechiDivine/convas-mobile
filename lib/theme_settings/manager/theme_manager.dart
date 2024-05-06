@@ -57,20 +57,49 @@ ThemeData _appTheme = ThemeData(
       ),
     ),
   ),
-  inputDecorationTheme: InputDecorationTheme(
-      hintStyle: getBodySmallStyle(
-          color: AppColors.white,
-          fontSize: AppFontSize.s14
-      ),
-      fillColor: AppColors.white,
-      focusColor: AppColors.white,
-      filled: true,
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)
-      )
-  ),
   primarySwatch: Colors.grey,
 );
 
 getApplicationTheme() {
   return _appTheme;
+}
+
+Widget getAppTextField({String? labelText, TextInputType? keyboardType, TextEditingController? controller}) {
+  return TextField(
+    controller: controller,
+    keyboardType: keyboardType,
+    cursorColor: AppColors.blackColor,
+    decoration: InputDecoration(
+      labelText: labelText,
+      labelStyle: getBodySmallStyle(
+        color: AppColors.blackColor,
+        fontSize: AppFontSize.s14,
+      ),
+      hintStyle: getBodySmallStyle(
+        color: AppColors.blackColor,
+        fontSize: AppFontSize.s14,
+      ),
+      fillColor: AppColors.white,
+      filled: true,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(5),
+        borderSide: BorderSide(
+          color: AppColors.blackColor,
+        ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(5),
+        borderSide: BorderSide(
+          color: AppColors.blackColor,
+        ),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(5),
+        borderSide: BorderSide(
+          color: AppColors.blackColor,
+        ),
+      ),
+      contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+    ),
+  );
 }
