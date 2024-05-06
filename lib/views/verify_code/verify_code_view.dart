@@ -31,9 +31,7 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
       appBar: AppBar(
         title: const Padding(
           padding: EdgeInsets.only(left: 50),
-          child: Text(
-            'Verify Code'
-          ),
+          child: Text('Verify Code'),
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_sharp),

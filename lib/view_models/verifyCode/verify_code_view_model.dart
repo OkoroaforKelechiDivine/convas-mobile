@@ -12,12 +12,12 @@ class VerifyCodeViewModel extends ChangeNotifier {
 
     for (int index = 0; index < 4; index++) {
       _controllers[index].addListener(() {
-        if (_controllers[index].text.isNotEmpty && index < 3) {
-          _focusNodes[index].unfocus();
-          _focusNodes[index + 1].requestFocus();
-        } else if (_controllers[index].text.isEmpty && index > 0) {
-          _focusNodes[index].unfocus();
-          _focusNodes[index - 1].requestFocus();
+        String value = _controllers[index].text;
+        if (value.isNotEmpty) {
+          if (index < 3) {
+            _focusNodes[index].unfocus();
+            _focusNodes[index + 1].requestFocus();
+          }
         }
       });
     }
@@ -58,6 +58,26 @@ class VerifyCodeViewModel extends ChangeNotifier {
         textAlign: TextAlign.center,
         maxLength: 1,
         keyboardType: TextInputType.number,
+        onChanged: (String value) {
+          if (value.isNotEmpty && value != " ") {
+            if (index < 3) {
+              _focusNodes[index].unfocus();
+              _focusNodes[index + 1].requestFocus();
+            }
+          } else {
+            if (index > 0) {
+              _focusNodes[index].unfocus();
+              _focusNodes[index - 1].requestFocus();
+            }
+          }
+        },
+        onEditingComplete: () {
+          String value = _controllers[index].text;
+          if (value.isEmpty && index > 0) {
+            _focusNodes[index].unfocus();
+            _focusNodes[index - 1].requestFocus();
+          }
+        },
         focusNode: _focusNodes[index],
         controller: _controllers[index],
         style: const TextStyle(
