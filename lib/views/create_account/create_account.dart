@@ -75,7 +75,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.blackColor
           ),
-          child: Text('Create account', style: TextStyle(color: AppColors.white),),
+          child: Text('Create account', style: TextStyle(color: AppColors.white)),
         ),
       ),
     );

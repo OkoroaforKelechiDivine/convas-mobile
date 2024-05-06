@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:safe_chat/assets_global/exports.dart';
 
-import '../../model/service/splash/splash_controller.dart';
+import '../../view_models/service/splash/splash_controller.dart';
+
 
 class SplashView extends StatelessWidget {
   const SplashView({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../model/user_model.dart';
+import '../../view_models/user_model.dart';
 import '../chat/set_chat.dart';
 
 class ProfileDetailsScreen extends StatefulWidget {

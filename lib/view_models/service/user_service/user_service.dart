@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../../../model/user_model.dart';
+import '../../user_model.dart';
 
 class UserService {
   final Dio _dio;

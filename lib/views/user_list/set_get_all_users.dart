@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../model/service/token/TokenProvider.dart';
-import '../../model/service/user_service/user_service.dart';
-import '../../model/user_model.dart';
+import '../../view_models/service/token/TokenProvider.dart';
+import '../../view_models/service/user_service/user_service.dart';
+import '../../view_models/user_model.dart';
 import '../profile/profile_details.dart';
 
 class GetAllUsersScreen extends StatefulWidget {
