@@ -17,8 +17,18 @@ class _CreateAccountViewState extends State<CreateAccountView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create an account'),
+        title: const Padding(
+          padding: EdgeInsets.only(left: 50),
+          child: Text('Create Account'),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_sharp),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20),

@@ -35,6 +35,12 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
             'Verify Code'
           ),
         ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_sharp),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -76,19 +82,20 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: ElevatedButton(
-                onPressed: () {
-                  _viewModel.sendCode(context);
-                },
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.blackColor
-                ),
-                child: Text("Send", style: TextStyle(color: AppColors.white)),
-              ),
-            ),
+
           ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(20),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pushReplacementNamed('/verify_code');
+          },
+          style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.blackColor
+          ),
+          child: Text('Send', style: TextStyle(color: AppColors.white)),
         ),
       ),
     );
