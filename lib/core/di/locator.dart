@@ -1,6 +1,8 @@
 import 'package:get_it/get_it.dart';
+import 'package:safe_chat/core/data/repository/create_account/create_account_repository.dart';
 
 import '../../view_models/service/navigations/navigation_service.dart';
+import '../../view_models/service/snack_bar/snack_bar_service.dart';
 import '../data/datasource/remote/authentication_data_provider.dart';
 import 'app_globals.dart';
 
@@ -36,7 +38,7 @@ Future<void> setupLocator() async {
 AppGlobals appGlobals = locator.get<AppGlobals>();
 
 NavigationService navigationService = locator.get<NavigationService>();
-// SnackbarService snackbarService = locator.get<SnackbarService>();
+SnackbarService snackbarService = locator.get<SnackbarService>();
 // BottomSheetService bottomSheetService = locator.get<BottomSheetService>();
 
 //STORAGES
@@ -44,12 +46,4 @@ NavigationService navigationService = locator.get<NavigationService>();
 // AppLocalStorage appLocalStorage = locator.get<AppLocalStorage>();
 
 //REPOS
-// AuthRepo authRepo = locator.get<AuthRepo>();
-// BankRepo bankRepo = locator.get<BankRepo>();
-// BusinessRepo businessRepo = locator.get<BusinessRepo>();
-// TransactionRepo transactionRepo = locator.get<TransactionRepo>();
-// TicketRepo ticketRepo = locator.get<TicketRepo>();
-// POSRepo posRepo = locator.get<POSRepo>();
-// InvoiceRepo invoiceRepo = locator.get<InvoiceRepo>();
-// RoleRepo roleRepo = locator.get<RoleRepo>();
-// AdminRepo adminRepo = locator.get<AdminRepo>();
+CreateAccountRepository createAccountRepository = locator.get<CreateAccountRepository>();

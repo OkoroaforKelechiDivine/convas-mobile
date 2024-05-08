@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../../model/response/auth/login_response.dart';
+import '../../model/response/auth/login/login_response.dart';
 import 'base/api_failure.dart';
 import 'base/api_response.dart';
 import 'base/api_service.dart';

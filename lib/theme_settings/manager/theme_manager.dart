@@ -63,14 +63,14 @@ ThemeData _appTheme = ThemeData(
 getApplicationTheme() {
   return _appTheme;
 }
-
-Widget getAppTextField({String? labelText, TextInputType? keyboardType, TextEditingController? controller}) {
+Widget getAppTextField({String? labelText, String? errorText, TextInputType? keyboardType, TextEditingController? controller}) {
   return TextField(
     controller: controller,
     keyboardType: keyboardType,
     cursorColor: AppColors.blackColor,
     decoration: InputDecoration(
       labelText: labelText,
+      errorText: errorText,
       labelStyle: getBodySmallStyle(
         color: AppColors.blackColor,
         fontSize: AppFontSize.s14,
@@ -103,3 +103,4 @@ Widget getAppTextField({String? labelText, TextInputType? keyboardType, TextEdit
     ),
   );
 }
+

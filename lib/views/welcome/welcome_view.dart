@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safe_chat/views/welcome/widget/intro_content.dart';
@@ -5,7 +6,11 @@ import 'package:safe_chat/theme_settings/manager/font_manager.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../assets_global/exports.dart';
+import '../../core/widgets/app_button.dart';
+import '../../core/widgets/app_text.dart';
+import '../../theme_settings/manager/theme_manager.dart';
 import '../../view_models/welcome/welcome_view_model.dart';
+import 'widget/image_with_title_and_content.dart';
 
 class WelcomeView extends StatelessWidget {
   const WelcomeView({Key? key}) : super(key: key);
@@ -16,71 +21,76 @@ class WelcomeView extends StatelessWidget {
       viewModelBuilder: () => WelcomeViewModel(),
       builder: (context, model, _) {
         return Scaffold(
-          body: Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(AssetsGifExport.security),
-                    fit: BoxFit.cover,
-                    colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.7),
-                      BlendMode.darken,
+          body: SafeArea(
+            child: Column(
+              children: [
+                SizedBox(height: 20.h),
+                Expanded(
+                  child: CarouselSlider(
+                    items: model.imageData.map((data) => ImageWithTitleAndContent(
+                      image: data['image']!,
+                      title: data['title']!,
+                      content: data['text']!,
+                    )).toList(),
+                    options: CarouselOptions(
+                      height: 700.h,
+                      enlargeCenterPage: true,
+                      autoPlay: true,
+                      autoPlayInterval: const Duration(seconds: 8),
+                      autoPlayAnimationDuration:
+                      const Duration(seconds: 2),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      pauseAutoPlayOnTouch: true,
+                      enableInfiniteScroll: true,
+                      viewportFraction: 1,
+                      onPageChanged: (index, _) {
+                        model.setCarouselIndex(index);
+                      },
                     ),
                   ),
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 21),
+                  width: MediaQuery.of(context).size.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IntroContent(
-                        title: "About Us",
-                        subtitle:
-                        "SafeChat serves as your reliable guardian amidst the vast landscape of social media, tirelessly dedicated to preserving"
-                            " your online safety. With its primary goal being the protection of your digital journey, SafeChat utilizes advanced computer "
-                            "algorithms to thoroughly examine each link that surfaces on your social media feed. Through its constant vigilance, SafeChat meticulously"
-                            " evaluates the endless flow of content, always on alert for any signs of potential threats or harmful intentions. Should it detect even the "
-                            "faintest indication of danger, SafeChat swiftly springs into action, promptly removing any risky links to shield you from harm. In essence, SafeChat is your "
-                            "steadfast companion, ensuring that your online experience remains secure and worry-free",
+                      Row(
+                        children: List.generate(
+                          model.imageData.length, (index) => Container(
+                          width: 10.w,
+                          height: 10.w,
+                          margin:
+                          const EdgeInsets.symmetric(horizontal: 4),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: index == model.currentCarouselIndex ? AppColors.blackColor : AppColors.white,
+                            border: index != model.currentCarouselIndex ? Border.all(color: AppColors.blackColor) : null,
+                          ),
+                        ),
+                        ),
+                      ),
+                      AppButton(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        onPressed: () {},
+                        title: 'Next',
+                        width: 150.w,
+                        height: 35.h,
+                        radius: 100.r,
+                        color: AppColors.blackColor,
+                        child: AppText(
+                          model.currentCarouselIndex == model.imageData.length - 1 ? 'Create Account' : 'Skip',
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14.sp,
+                        ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Positioned(
-                left: 20,
-                right: 20,
-                bottom: 20.r,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          model.navigateToCreateAccount(context);
-                        },
-                        child: const Text(
-                          'Create Account',
-                          style: TextStyle(fontWeight: AppFontWeight.bold),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10.w),
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Login',
-                          style: TextStyle(fontWeight: AppFontWeight.bold),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+                SizedBox(height: 20.h),
+              ],
+            ),
           ),
         );
       },

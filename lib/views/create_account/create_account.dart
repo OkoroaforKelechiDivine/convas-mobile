@@ -10,7 +10,7 @@ class CreateAccountView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder.reactive(
+    return ViewModelBuilder<CreateAccountViewModel>.reactive(
       viewModelBuilder: () => CreateAccountViewModel(),
       builder: (context, viewModel, child) {
         return Scaffold(
@@ -22,58 +22,58 @@ class CreateAccountView extends StatelessWidget {
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_sharp),
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed('/info1');
+                // Navigator.of(context).pushNamed(WelcomeView()).;
               },
             ),
           ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Text('Please register with the correct information and sign up to continue using our app.'),
-                  SizedBox(height: 40.h),
-                  getAppTextField(labelText: 'First Name'),
-                  SizedBox(height: 20.h),
-                  getAppTextField(labelText: 'Last Name'),
-                  SizedBox(height: 20.h),
-                  getAppTextField(labelText: 'Email'),
-                  SizedBox(height: 20.h),
-                  getAppTextField(labelText: 'Password'),
-                  SizedBox(height: 20.h),
-                  getAppTextField(labelText: 'Confirm Password'),
-                  SizedBox(height: 20.h),
-                  GenderSelectionWidget(
-                    selectedValue: viewModel.selectedGender,
-                    onChanged: viewModel.updateSelectedGender,
-                  ),
-                  SizedBox(height: 30.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      const Text("Have an account already? "),
-                      InkWell(
-                        onTap: () {},
-                        child: const Text(
-                          "Login",
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold,
-                          ),
+          body: Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 2),
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                const Text('Please register with the correct information and sign up to continue using our app.'),
+                SizedBox(height: 30.h),
+                getAppTextField(labelText: 'First Name', errorText: viewModel.firstNameError),
+                SizedBox(height: 20.h),
+                getAppTextField(labelText: 'Last Name', errorText: viewModel.lastNameError),
+                SizedBox(height: 20.h),
+                getAppTextField(labelText: 'Email', errorText: viewModel.emailError),
+                SizedBox(height: 20.h),
+                getAppTextField(labelText: 'Password', errorText: viewModel.passwordError),
+                SizedBox(height: 20.h),
+                getAppTextField(labelText: 'Confirm Password', errorText: viewModel.confirmPasswordError),
+                SizedBox(height: 20.h),
+                GenderSelectionWidget(
+                  selectedValue: viewModel.selectedGender,
+                  onChanged: viewModel.updateSelectedGender,
+                ),
+                SizedBox(height: 30.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text("Have an account already? "),
+                    InkWell(
+                      onTap: () {},
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
           bottomNavigationBar: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 0),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed('/verify_code');
+                viewModel.createAccount(context, () {
+                  Navigator.of(context).pushReplacementNamed('/verify_code');
+                });
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.blackColor,
