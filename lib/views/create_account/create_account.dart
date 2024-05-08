@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:safe_chat/views/create_account/widget/get_text_field.dart';
 import 'package:stacked/stacked.dart';
 import 'package:safe_chat/views/create_account/widget/get_dropdown_button.dart';
 import '../../theme_settings/manager/theme_manager.dart';
@@ -22,7 +23,7 @@ class CreateAccountView extends StatelessWidget {
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_sharp),
               onPressed: () {
-                // Navigator.of(context).pushNamed(WelcomeView()).;
+                viewModel.navigateToWelcomeScreen(context);
               },
             ),
           ),
@@ -33,15 +34,42 @@ class CreateAccountView extends StatelessWidget {
               children: [
                 const Text('Please register with the correct information and sign up to continue using our app.'),
                 SizedBox(height: 30.h),
-                getAppTextField(labelText: 'First Name', errorText: viewModel.firstNameError),
+                getAppTextField(
+                  labelText: 'First Name',
+                  controller: viewModel.firstName,
+                  errorText: viewModel.firstNameError,
+                  onChanged: viewModel.clearFirstNameError,
+                ),
                 SizedBox(height: 20.h),
-                getAppTextField(labelText: 'Last Name', errorText: viewModel.lastNameError),
+                getAppTextField(
+                  controller: viewModel.lastName,
+                  labelText: 'Last Name',
+                  errorText: viewModel.lastNameError,
+                  onChanged: viewModel.clearLastNameError,
+                ),
                 SizedBox(height: 20.h),
-                getAppTextField(labelText: 'Email', errorText: viewModel.emailError),
+                getAppTextField(
+                  labelText: 'Phone Number',
+                  controller: viewModel.phoneNumber,
+                  errorText: viewModel.phoneNumberError,
+                  onChanged: viewModel.clearPhoneNumberError,
+                ),
                 SizedBox(height: 20.h),
-                getAppTextField(labelText: 'Password', errorText: viewModel.passwordError),
+                getAppTextField(
+                  labelText: 'Password',
+                  controller: viewModel.password,
+                  errorText: viewModel.passwordError,
+                  obscureText: true,
+                  onChanged: viewModel.clearPasswordError,
+                ),
                 SizedBox(height: 20.h),
-                getAppTextField(labelText: 'Confirm Password', errorText: viewModel.confirmPasswordError),
+                getAppTextField(
+                  labelText: 'Confirm Password',
+                  controller: viewModel.confirmPassword,
+                  errorText: viewModel.confirmPasswordError,
+                  obscureText: true,
+                  onChanged: viewModel.clearConfirmPasswordError,
+                ),
                 SizedBox(height: 20.h),
                 GenderSelectionWidget(
                   selectedValue: viewModel.selectedGender,
@@ -54,10 +82,10 @@ class CreateAccountView extends StatelessWidget {
                     const Text("Have an account already? "),
                     InkWell(
                       onTap: () {},
-                      child: const Text(
+                      child: Text(
                         "Login",
                         style: TextStyle(
-                          color: Colors.green,
+                          color: AppColors.green,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

@@ -1,29 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:safe_chat/views/welcome/welcome_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:safe_chat/core/data/model/params/create_account/create_account_param.dart';
 import 'package:safe_chat/core/di/di.dart';
 
 class CreateAccountViewModel extends BaseViewModel {
   String? selectedGender;
-
   TextEditingController firstName = TextEditingController();
   TextEditingController lastName = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController confirmPassword = TextEditingController();
   TextEditingController gender = TextEditingController();
   bool isLoading = false;
 
   String? firstNameError;
   String? lastNameError;
-  String? emailError;
+  String? phoneNumberError;
   String? passwordError;
   String? confirmPasswordError;
 
+  void navigateToWelcomeScreen(BuildContext context) {
+    navigationService.pushReplacement(const WelcomeView());
+  }
+
   void validateAndClearErrors() {
-    firstNameError = firstName.text.isEmpty ? 'First Name cannot be empty' : null;
-    lastNameError = lastName.text.isEmpty ? 'Last Name cannot be empty' : null;
-    emailError = phoneNumber.text.isEmpty ? 'Email cannot be empty' : null;
-    passwordError = password.text.isEmpty ? 'Password cannot be empty' : null;
+    if (firstName.text.isEmpty) {
+      firstNameError = 'First Name cannot be empty';
+    } else {
+      firstNameError = null;
+    }
+    if (lastName.text.isEmpty) {
+      lastNameError = 'Last Name cannot be empty';
+    } else {
+      lastNameError = null;
+    }
+    if (phoneNumber.text.isEmpty) {
+      phoneNumberError = 'Phone number cannot be empty';
+    } else {
+      phoneNumberError = null;
+    }
+    if (password.text.isEmpty) {
+      passwordError = 'Password cannot be empty';
+    } else {
+      passwordError = null;
+    }
+    if (confirmPassword.text.isEmpty) {
+      confirmPasswordError = 'Confirm Password cannot be empty';
+    } else {
+      confirmPasswordError = null;
+    }
+    if (password.text != confirmPassword.text) {
+      confirmPasswordError = 'Passwords do not match';
+    }
     notifyListeners();
   }
 
@@ -31,13 +60,58 @@ class CreateAccountViewModel extends BaseViewModel {
     selectedGender = newValue;
   }
 
-  Future<void> createAccount(BuildContext context, Function()? onPop) async {
+  void clearFirstNameError() {
+    firstNameError = null;
+    notifyListeners();
+  }
+
+  void clearLastNameError() {
+    lastNameError = null;
+    notifyListeners();
+  }
+
+  void clearPhoneNumberError() {
+    phoneNumberError = null;
+    notifyListeners();
+  }
+
+  void clearPasswordError() {
+    passwordError = null;
+    notifyListeners();
+  }
+
+  void clearConfirmPasswordError() {
+    confirmPasswordError = null;
+    notifyListeners();
+  }
+  void createAccount(BuildContext context, Function()? onPop) async {
     validateAndClearErrors();
-    if (firstNameError != null || lastNameError != null || emailError != null || passwordError != null) {
+
+    if (firstName.text.isEmpty) {
+      firstNameError = 'First Name cannot be empty';
+    }
+    if (lastName.text.isEmpty) {
+      lastNameError = 'Last Name cannot be empty';
+    }
+    if (phoneNumber.text.isEmpty) {
+      phoneNumberError = 'Phone number cannot be empty';
+    }
+    if (password.text.isEmpty) {
+      passwordError = 'Password cannot be empty';
+    }
+    if (confirmPassword.text.isEmpty) {
+      confirmPasswordError = 'Confirm Password cannot be empty';
+    }
+
+    notifyListeners();
+
+    if (firstNameError != null || lastNameError != null || phoneNumberError != null || passwordError != null || confirmPasswordError != null) {
       return;
     }
+
     isLoading = true;
     notifyListeners();
+
     final response = await createAccountRepository.createAccount(
       param: CreateAccountParam(
         firstName: firstName.text,
@@ -47,6 +121,7 @@ class CreateAccountViewModel extends BaseViewModel {
         phoneNumber: phoneNumber.text,
       ),
     );
+
     if (response.success) {
       isLoading = false;
       notifyListeners();
