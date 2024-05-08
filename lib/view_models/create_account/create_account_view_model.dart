@@ -18,6 +18,7 @@ class CreateAccountViewModel extends BaseViewModel {
   String? lastNameError;
   String? phoneNumberError;
   String? passwordError;
+  String? genderError;
   String? confirmPasswordError;
 
   void navigateToWelcomeScreen(BuildContext context) {
@@ -53,11 +54,17 @@ class CreateAccountViewModel extends BaseViewModel {
     if (password.text != confirmPassword.text) {
       confirmPasswordError = 'Passwords do not match';
     }
+    if (gender.text.isEmpty) {
+      genderError = 'Please select a gender';
+    } else {
+      genderError = null;
+    }
     notifyListeners();
   }
 
   void updateSelectedGender(String? newValue) {
     selectedGender = newValue;
+    notifyListeners();
   }
 
   void clearFirstNameError() {
@@ -84,6 +91,12 @@ class CreateAccountViewModel extends BaseViewModel {
     confirmPasswordError = null;
     notifyListeners();
   }
+
+  void clearGenderError() {
+    genderError = null;
+    notifyListeners();
+  }
+
   void createAccount(BuildContext context, Function()? onPop) async {
     validateAndClearErrors();
 
@@ -102,10 +115,12 @@ class CreateAccountViewModel extends BaseViewModel {
     if (confirmPassword.text.isEmpty) {
       confirmPasswordError = 'Confirm Password cannot be empty';
     }
-
+    if (gender.text.isEmpty) {
+      genderError = 'Please select a gender';
+    }
     notifyListeners();
 
-    if (firstNameError != null || lastNameError != null || phoneNumberError != null || passwordError != null || confirmPasswordError != null) {
+    if (firstNameError != null || lastNameError != null || phoneNumberError != null || passwordError != null || confirmPasswordError != null || genderError != null) {
       return;
     }
 

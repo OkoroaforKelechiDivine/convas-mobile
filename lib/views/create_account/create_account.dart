@@ -74,8 +74,11 @@ class CreateAccountView extends StatelessWidget {
                 GenderSelectionWidget(
                   selectedValue: viewModel.selectedGender,
                   onChanged: viewModel.updateSelectedGender,
+                  controller: viewModel.gender,
+                  errorText: viewModel.genderError,
                 ),
-                SizedBox(height: 30.h),
+
+                SizedBox(height: 20.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
