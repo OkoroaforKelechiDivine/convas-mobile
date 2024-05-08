@@ -72,7 +72,15 @@ class WelcomeView extends StatelessWidget {
                       ),
                       AppButton(
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                        onPressed: () {},
+                        onPressed: () {
+                          if (model.currentCarouselIndex == model.imageData.length - 1) {
+                            // If it's the last carousel, navigate to create account
+                            model.navigateToCreateAccount(context);
+                          } else {
+                            // Otherwise, move to the next carousel
+                            model.setCarouselIndex(model.currentCarouselIndex + 1);
+                          }
+                        },
                         title: 'Next',
                         width: 150.w,
                         height: 35.h,
@@ -85,6 +93,7 @@ class WelcomeView extends StatelessWidget {
                           fontSize: 14.sp,
                         ),
                       ),
+
                     ],
                   ),
                 ),
