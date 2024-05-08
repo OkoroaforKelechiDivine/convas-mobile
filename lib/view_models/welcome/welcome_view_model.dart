@@ -13,7 +13,7 @@ class WelcomeViewModel extends BaseViewModel{
   List<Map<String, String>> imageData = [
     {
       'image': AssetsImageExport.hello,
-      'title': 'Ready to connect with the world? 🌍',
+      'title': 'Connect with the world 🌍',
       'text': "Join SafeChat and wave hello to endless\n opportunities! From making new friends\n"
           " to sharing your stories"
     },
