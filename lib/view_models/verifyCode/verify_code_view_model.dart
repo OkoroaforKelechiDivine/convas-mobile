@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stacked/stacked.dart';
 import '../../../theme_settings/manager/font_manager.dart';
 import '../../theme_settings/manager/theme_manager.dart';
 
-class VerifyCodeViewModel extends ChangeNotifier {
+class VerifyCodeViewModel extends BaseViewModel {
   late List<FocusNode> _focusNodes;
   late List<TextEditingController> _controllers;
 
@@ -30,8 +32,8 @@ class VerifyCodeViewModel extends ChangeNotifier {
 
   Widget buildDigitInput(BuildContext context, int index) {
     return SizedBox(
-      width: 50,
-      height: 60,
+      width: 50.w,
+      height: 60.h,
       child: TextField(
         cursorColor: AppColors.blackColor,
         decoration: InputDecoration(
