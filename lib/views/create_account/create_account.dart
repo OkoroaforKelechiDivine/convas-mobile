@@ -34,41 +34,43 @@ class CreateAccountView extends StatelessWidget {
               children: [
                 const Text('Please register with the correct information and sign up to continue using our app.'),
                 SizedBox(height: 30.h),
-                getAppTextField(
+                AppTextField(
                   labelText: 'First Name',
                   controller: viewModel.firstName,
                   errorText: viewModel.firstNameError,
                   onChanged: viewModel.clearFirstNameError,
                 ),
                 SizedBox(height: 20.h),
-                getAppTextField(
+                AppTextField(
                   controller: viewModel.lastName,
                   labelText: 'Last Name',
                   errorText: viewModel.lastNameError,
                   onChanged: viewModel.clearLastNameError,
                 ),
                 SizedBox(height: 20.h),
-                getAppTextField(
+                AppTextField(
                   labelText: 'Phone Number',
+                  keyboardType: TextInputType.number, // Example keyboard type
                   controller: viewModel.phoneNumber,
                   errorText: viewModel.phoneNumberError,
                   onChanged: viewModel.clearPhoneNumberError,
                 ),
                 SizedBox(height: 20.h),
-                getAppTextField(
+                AppTextField(
                   labelText: 'Password',
                   controller: viewModel.password,
                   errorText: viewModel.passwordError,
                   obscureText: true,
                   onChanged: viewModel.clearPasswordError,
                 ),
+
                 SizedBox(height: 20.h),
-                getAppTextField(
-                  labelText: 'Confirm Password',
-                  controller: viewModel.confirmPassword,
-                  errorText: viewModel.confirmPasswordError,
+                AppTextField(
+                  labelText: 'Password',
+                  controller: viewModel.password,
+                  errorText: viewModel.passwordError,
                   obscureText: true,
-                  onChanged: viewModel.clearConfirmPasswordError,
+                  onChanged: viewModel.clearPasswordError,
                 ),
                 SizedBox(height: 20.h),
                 GenderSelectionWidget(

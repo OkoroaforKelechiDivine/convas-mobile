@@ -14,7 +14,7 @@ class ProfileFormWidget extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          getAppTextField(
+          AppTextField(
             labelText: 'Username',
             keyboardType: TextInputType.text,
             controller: TextEditingController(text: viewModel.userName),
@@ -23,7 +23,7 @@ class ProfileFormWidget extends StatelessWidget {
           GestureDetector(
             onTap: () => viewModel.selectDate(context),
             child: AbsorbPointer(
-              child: getAppTextField(
+              child: AppTextField(
                 labelText: 'Date of Birth',
                 keyboardType: TextInputType.datetime,
                 controller: TextEditingController(
@@ -33,13 +33,13 @@ class ProfileFormWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          getAppTextField(
+          AppTextField(
             labelText: 'Bio',
             keyboardType: TextInputType.text,
             controller: TextEditingController(text: viewModel.lastName),
           ),
           const SizedBox(height: 20),
-          getAppTextField(
+          AppTextField(
             labelText: 'Hobbies',
             keyboardType: TextInputType.text,
             controller: TextEditingController(text: viewModel.emailAddress),
