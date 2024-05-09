@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:safe_chat/views/profile/widget/form.dart';
 import 'package:safe_chat/views/profile/widget/profile_picture.dart';
-import '../../theme_settings/manager/theme_manager.dart';
+import '../../app_style/manager/theme_manager.dart';
 import '../../view_models/create_profile/create_profile_view_model.dart';
 
 class ProfileScreen extends StatefulWidget {

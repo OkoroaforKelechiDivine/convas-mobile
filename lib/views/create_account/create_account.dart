@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:safe_chat/utilities/widgets/app_text.dart';
 import 'package:safe_chat/views/create_account/widget/get_text_field.dart';
 import 'package:stacked/stacked.dart';
 import 'package:safe_chat/views/create_account/widget/get_dropdown_button.dart';
-import '../../theme_settings/manager/theme_manager.dart';
+import '../../app_style/manager/theme_manager.dart';
+import '../../utilities/widgets/app_button.dart';
 import '../../view_models/create_account/create_account_view_model.dart';
 
 class CreateAccountView extends StatelessWidget {
@@ -18,7 +20,7 @@ class CreateAccountView extends StatelessWidget {
           appBar: AppBar(
             title: const Padding(
               padding: EdgeInsets.only(left: 50),
-              child: Text('Create Account'),
+              child: AppText('Create Account'),
             ),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_sharp),
@@ -32,7 +34,7 @@ class CreateAccountView extends StatelessWidget {
             child: ListView(
               shrinkWrap: true,
               children: [
-                const Text('Please register with the correct information and sign up to continue using our app.'),
+                const AppText('Please register with the correct information and sign up to continue using our app.'),
                 SizedBox(height: 30.h),
                 AppTextField(
                   labelText: 'First Name',
@@ -85,12 +87,10 @@ class CreateAccountView extends StatelessWidget {
                     const Text("Have an account already? "),
                     InkWell(
                       onTap: () {},
-                      child: Text(
+                      child: AppText(
                         "Login",
-                        style: TextStyle(
-                          color: AppColors.green,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        color: AppColors.green,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -100,16 +100,15 @@ class CreateAccountView extends StatelessWidget {
           ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 0),
-            child: ElevatedButton(
+            child: AppButton(
               onPressed: () {
                 viewModel.createAccount(() {
                   Navigator.of(context).pushReplacementNamed('/verify_code');
                 });
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.blackColor,
-              ),
-              child: Text('Create account', style: TextStyle(color: AppColors.white)),
+              loading: viewModel.isLoading,
+              color: AppColors.blackColor,
+              child: AppText('Create account', color: AppColors.white),
             ),
           ),
         );

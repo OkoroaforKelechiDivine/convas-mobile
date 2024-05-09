@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme_settings/manager/font_manager.dart';
+import '../../app_style/manager/font_manager.dart';
 
 class ResetPasscodeScreen extends StatefulWidget {
   const ResetPasscodeScreen({Key? key}) : super(key: key);
@@ -78,12 +78,5 @@ class _ResetPasscodeScreenState extends State<ResetPasscodeScreen> {
       },
       child: const Text('Reset Password'),
     );
-  }
-
-  @override
-  void dispose() {
-    newPasswordController.dispose();
-    confirmPasswordController.dispose();
-    super.dispose();
   }
 }

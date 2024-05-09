@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:safe_chat/views/welcome/welcome_view.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../../core/di/locator.dart';
+import '../../locator/locator.dart';
 
 class SplashScreenViewModel extends BaseViewModel {
   Future<void> initializeSplashScreen() async {

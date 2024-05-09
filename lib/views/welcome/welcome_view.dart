@@ -1,14 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:safe_chat/views/welcome/widget/intro_content.dart';
-import 'package:safe_chat/theme_settings/manager/font_manager.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../assets_global/exports.dart';
-import '../../core/widgets/app_button.dart';
-import '../../core/widgets/app_text.dart';
-import '../../theme_settings/manager/theme_manager.dart';
+import '../../app_style/manager/theme_manager.dart';
+import '../../utilities/widgets/app_button.dart';
+import '../../utilities/widgets/app_text.dart';
 import '../../view_models/welcome/welcome_view_model.dart';
 import 'widget/image_with_title_and_content.dart';
 
@@ -93,7 +90,6 @@ class WelcomeView extends StatelessWidget {
                           fontSize: 14.sp,
                         ),
                       ),
-
                     ],
                   ),
                 ),

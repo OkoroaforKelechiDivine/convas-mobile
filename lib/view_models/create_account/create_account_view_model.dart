@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/get_utils.dart';
 import 'package:safe_chat/views/welcome/welcome_view.dart';
 import 'package:stacked/stacked.dart';
-import 'package:safe_chat/core/data/model/params/create_account/create_account_param.dart';
-import 'package:safe_chat/core/di/di.dart';
+
+import '../../locator/locator.dart';
+import '../../model/params/create_account/create_account_param.dart';
 
 class CreateAccountViewModel extends BaseViewModel {
   String? selectedGender;
@@ -124,7 +124,7 @@ class CreateAccountViewModel extends BaseViewModel {
     if (firstNameError != null || lastNameError != null || phoneNumberError != null || passwordError != null || confirmPasswordError != null || genderError != null) {
       return;
     }
-    isLoading = true;
+    isLoading = false;
     notifyListeners();
 
     String modifiedPhoneNumber = phoneNumber.text.replaceFirst('0', '+234');
@@ -140,14 +140,10 @@ class CreateAccountViewModel extends BaseViewModel {
       ),
     );
     if (response.success) {
-      isLoading = false;
-      notifyListeners();
       snackbarService.success(message: response.data!.message);
       onPop?.call();
       navigationService.pop();
     } else {
-      isLoading = false;
-      notifyListeners();
       snackbarService.error(message: response.message!);
     }
   }

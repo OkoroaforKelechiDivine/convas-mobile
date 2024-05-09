@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:safe_chat/view_models/service/navigations/navigation_service.dart';
 
 import 'app.dart';
-import 'core/di/app_globals.dart';
-import 'core/di/locator.dart';
+import 'locator/app_globals.dart';
+import 'locator/locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

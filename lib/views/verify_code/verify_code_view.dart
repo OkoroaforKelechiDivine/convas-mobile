@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import '../../theme_settings/manager/font_manager.dart';
-import '../../theme_settings/manager/theme_manager.dart';
+import '../../app_style/manager/font_manager.dart';
+import '../../app_style/manager/theme_manager.dart';
 import '../../view_models/verifyCode/verify_code_view_model.dart';
 
 class VerifyCodeView extends StatelessWidget {

@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:safe_chat/utilities/widgets/app_text.dart';
 
-import '../../../theme_settings/manager/font_manager.dart';
-import '../../../theme_settings/manager/theme_manager.dart';
+import '../../../app_style/manager/font_manager.dart';
+import '../../../app_style/manager/theme_manager.dart';
 
 class ImageWithTitleAndContent extends StatelessWidget {
   final String image;
@@ -40,13 +41,11 @@ class ImageWithTitleAndContent extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 3.h),
-              Text(
+              AppText(
                 content,
-                style: TextStyle(
-                  fontSize: 15.sp,
-                  color: AppColors.blackColor,
-                ),
-                textAlign: TextAlign.center,
+                fontSize: 15.sp,
+                color: AppColors.blackColor,
+                alignment: TextAlign.center,
               ),
             ],
           ),

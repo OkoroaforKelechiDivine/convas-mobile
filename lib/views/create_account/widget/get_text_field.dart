@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme_settings/manager/font_manager.dart';
-import '../../../theme_settings/manager/style_manager.dart';
-import '../../../theme_settings/manager/theme_manager.dart';
+import '../../../app_style/manager/font_manager.dart';
+import '../../../app_style/manager/style_manager.dart';
+import '../../../app_style/manager/theme_manager.dart';
 
 class AppTextField extends StatefulWidget {
   final String? labelText;

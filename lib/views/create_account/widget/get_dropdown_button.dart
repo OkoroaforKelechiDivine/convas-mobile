@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../theme_settings/manager/font_manager.dart';
-import '../../../theme_settings/manager/theme_manager.dart';
+import '../../../app_style/manager/font_manager.dart';
+import '../../../app_style/manager/theme_manager.dart';
+
 
 class GenderSelectionWidget extends StatefulWidget {
   final String? selectedValue;
@@ -29,12 +30,6 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Text(
-        //   'Gender',
-        //   style: TextStyle(
-        //     fontWeight: FontWeight.bold,
-        //   ),
-        // ),
         Container(
           padding: const EdgeInsets.all(10),
           height: 45.h,
@@ -52,11 +47,11 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
         ),
         if (widget.errorText != null)
           Padding(
-            padding: EdgeInsets.only(left: 10, top: 5),
+            padding: const EdgeInsets.only(left: 10, top: 5),
             child: Text(
               widget.errorText!,
               style: TextStyle(
-                color: Colors.red, // Change color to indicate error
+                color: Colors.red,
                 fontSize: 12.sp,
               ),
             ),
@@ -69,16 +64,16 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
     return GestureDetector(
       onTap: () {
         widget.onChanged?.call(gender);
-        widget.controller?.text = gender; // Bind selected value to the controller
-        setState(() {}); // Update UI
+        widget.controller?.text = gender;
+        setState(() {});
       },
       child: Row(
         children: [
           GestureDetector(
             onTap: () {
               widget.onChanged?.call(gender);
-              widget.controller?.text = gender; // Bind selected value to the controller
-              setState(() {}); // Update UI
+              widget.controller?.text = gender;
+              setState(() {});
             },
             child: Container(
               width: 20.w,

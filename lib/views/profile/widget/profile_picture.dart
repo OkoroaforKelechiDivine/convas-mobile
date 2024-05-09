@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-import '../../../theme_settings/manager/theme_manager.dart';
+import '../../../app_style/manager/theme_manager.dart';
 import '../../../view_models/create_profile/create_profile_view_model.dart';
 
 class ProfilePictureWidget extends StatefulWidget {

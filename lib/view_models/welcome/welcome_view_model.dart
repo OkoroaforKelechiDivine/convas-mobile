@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:safe_chat/views/create_account/create_account.dart';
 import 'package:stacked/stacked.dart';
-import '../../assets_global/exports.dart';
-import '../../core/di/locator.dart';
+import '../../locator/locator.dart';
+import '../../utilities/app_assets/exports.dart';
 
 class WelcomeViewModel extends BaseViewModel{
 
