@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:safe_chat/views/welcome/welcome_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:safe_chat/core/data/model/params/create_account/create_account_param.dart';
@@ -83,7 +84,7 @@ class CreateAccountViewModel extends BaseViewModel {
   }
 
   void clearPasswordError() {
-    confirmPasswordError = null;
+    passwordError = null;
     notifyListeners();
   }
 
@@ -97,7 +98,7 @@ class CreateAccountViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void createAccount(BuildContext context, Function()? onPop) async {
+ Future<void> createAccount( Function()? onPop) async {
     validateAndClearErrors();
 
     if (firstName.text.isEmpty) {
@@ -126,13 +127,16 @@ class CreateAccountViewModel extends BaseViewModel {
     isLoading = true;
     notifyListeners();
 
+    String modifiedPhoneNumber = phoneNumber.text.replaceFirst('0', '+234');
+      String modifiedGender = gender.text.toUpperCase();
+
     final response = await createAccountRepository.createAccount(
       param: CreateAccountParam(
         firstName: firstName.text,
         lastName: lastName.text,
         password: password.text,
-        gender: gender.text,
-        phoneNumber: phoneNumber.text,
+        gender: modifiedGender,
+        phoneNumber: modifiedPhoneNumber
       ),
     );
     if (response.success) {

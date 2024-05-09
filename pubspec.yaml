@@ -17,6 +17,8 @@ dependencies:
   overlay_support:
   font_awesome_flutter:
   dio:
+  hive:
+  hive_flutter:
   flutter_screenutil:
   stacked:
   carousel_slider:

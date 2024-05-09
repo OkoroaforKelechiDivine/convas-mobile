@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:safe_chat/theme_settings/manager/theme_manager.dart';
 import 'package:safe_chat/views/auth/auth.dart';
 import 'package:safe_chat/views/check_mail/set_check_mail.dart';
@@ -68,19 +69,20 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return
-      ScreenUtilInit(
-        builder: (context, child) {
-          return GestureDetector(
-            child: MaterialApp(
-              debugShowCheckedModeBanner: false,
-              navigatorKey: navigationService.navigatorKey,
-              title: 'SafeChat',
-              theme: getApplicationTheme(),
-              home: const SplashView(),
-            ),
-          );
-        },
+    return OverlaySupport.global(
+        child: ScreenUtilInit(
+          builder: (context, child) {
+            return GestureDetector(
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                navigatorKey: navigationService.navigatorKey,
+                title: 'SafeChat',
+                theme: getApplicationTheme(),
+                home: const SplashView(),
+              ),
+            );
+          },
+        ),
     );
   }
 }
