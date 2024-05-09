@@ -50,7 +50,7 @@ class CreateAccountView extends StatelessWidget {
                 SizedBox(height: 20.h),
                 AppTextField(
                   labelText: 'Phone Number',
-                  keyboardType: TextInputType.number, // Example keyboard type
+                  keyboardType: TextInputType.number,
                   controller: viewModel.phoneNumber,
                   errorText: viewModel.phoneNumberError,
                   onChanged: viewModel.clearPhoneNumberError,
@@ -63,12 +63,11 @@ class CreateAccountView extends StatelessWidget {
                   obscureText: true,
                   onChanged: viewModel.clearPasswordError,
                 ),
-
                 SizedBox(height: 20.h),
                 AppTextField(
-                  labelText: 'Password',
-                  controller: viewModel.password,
-                  errorText: viewModel.passwordError,
+                  labelText: 'Confirm Password',
+                  controller: viewModel.confirmPassword,
+                  errorText: viewModel.confirmPasswordError,
                   obscureText: true,
                   onChanged: viewModel.clearPasswordError,
                 ),
@@ -79,7 +78,6 @@ class CreateAccountView extends StatelessWidget {
                   controller: viewModel.gender,
                   errorText: viewModel.genderError,
                 ),
-
                 SizedBox(height: 20.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,

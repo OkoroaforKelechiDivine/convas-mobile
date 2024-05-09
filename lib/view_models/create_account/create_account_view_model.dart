@@ -83,7 +83,7 @@ class CreateAccountViewModel extends BaseViewModel {
   }
 
   void clearPasswordError() {
-    passwordError = null;
+    confirmPasswordError = null;
     notifyListeners();
   }
 
@@ -123,7 +123,6 @@ class CreateAccountViewModel extends BaseViewModel {
     if (firstNameError != null || lastNameError != null || phoneNumberError != null || passwordError != null || confirmPasswordError != null || genderError != null) {
       return;
     }
-
     isLoading = true;
     notifyListeners();
 
@@ -136,7 +135,6 @@ class CreateAccountViewModel extends BaseViewModel {
         phoneNumber: phoneNumber.text,
       ),
     );
-
     if (response.success) {
       isLoading = false;
       notifyListeners();
