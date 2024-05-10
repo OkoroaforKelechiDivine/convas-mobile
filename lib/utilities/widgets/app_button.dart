@@ -12,7 +12,6 @@ class CustomElevatedButton extends StatelessWidget {
   final double? height;
   final double? radius;
 
-
   const CustomElevatedButton({
     Key? key,
     this.onPressed,
@@ -37,12 +36,16 @@ class CustomElevatedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(radius ?? 0),
         ),
       ),
-      child: isLoading ? Center(
+      child: isLoading
+          ? SizedBox(
+        width: 24,
+        height: 24,
         child: CircularProgressIndicator(
-          strokeWidth: 1,
+          strokeWidth: 2,
           valueColor: AlwaysStoppedAnimation<Color>(AppColors.white),
         ),
-      ) : AppText(buttonText, color: AppColors.white),
+      )
+          : AppText(buttonText, color: AppColors.white),
     );
   }
 }

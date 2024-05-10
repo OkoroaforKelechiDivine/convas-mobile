@@ -72,10 +72,8 @@ class WelcomeView extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           onPressed: () {
                             if (model.currentCarouselIndex == model.imageData.length - 1) {
-                              // If it's the last carousel, navigate to create account
                               model.navigateToCreateAccount(context);
                             } else {
-                              // Otherwise, move to the next carousel
                               model.setCarouselIndex(model.currentCarouselIndex + 1);
                             }
                           },
@@ -83,7 +81,6 @@ class WelcomeView extends StatelessWidget {
                           radius: 100.r,
                         ),
                       ),
-
                     ],
                   ),
                 ),

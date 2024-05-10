@@ -115,7 +115,6 @@ class CreateAccountView extends StatelessWidget {
               ],
             ),
           ),
-
         );
       },
     );

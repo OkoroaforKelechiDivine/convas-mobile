@@ -35,39 +35,14 @@ class CreateAccountViewModel extends BaseViewModel {
   }
 
   void validateAndClearErrors() {
-    if (firstName.text.isEmpty) {
-      firstNameError = 'First Name cannot be empty';
-    } else {
-      firstNameError = null;
-    }
-    if (lastName.text.isEmpty) {
-      lastNameError = 'Last Name cannot be empty';
-    } else {
-      lastNameError = null;
-    }
-    if (phoneNumber.text.isEmpty) {
-      phoneNumberError = 'Phone number cannot be empty';
-    } else {
-      phoneNumberError = null;
-    }
-    if (password.text.isEmpty) {
-      passwordError = 'Password cannot be empty';
-    } else {
-      passwordError = null;
-    }
-    if (confirmPassword.text.isEmpty) {
-      confirmPasswordError = 'Confirm Password cannot be empty';
-    } else {
-      confirmPasswordError = null;
-    }
-    if (password.text != confirmPassword.text) {
-      confirmPasswordError = 'Passwords do not match';
-    }
-    if (gender.text.isEmpty) {
-      genderError = 'Please select a gender';
-    } else {
-      genderError = null;
-    }
+    firstNameError = firstName.text.isEmpty ? 'First Name cannot be empty' : null;
+    lastNameError = lastName.text.isEmpty ? 'Last Name cannot be empty' : null;
+    phoneNumberError = phoneNumber.text.isEmpty ? 'Phone number cannot be empty' : null;
+    passwordError = password.text.isEmpty ? 'Password cannot be empty' : null;
+    confirmPasswordError = confirmPassword.text.isEmpty ? 'Confirm Password cannot be empty' : null;
+    confirmPasswordError = password.text != confirmPassword.text ? 'Passwords do not match' : confirmPasswordError;
+    genderError = gender.text.isEmpty ? 'Please select a gender' : null;
+
     notifyListeners();
   }
 
@@ -109,46 +84,27 @@ class CreateAccountViewModel extends BaseViewModel {
   }
 
 
- Future<void> createAccount( Function()? onPop) async {
-   _isLoading = true;
-   notifyListeners();
-   validateAndClearErrors();
-
-    if (firstName.text.isEmpty) {
-      firstNameError = 'First Name cannot be empty';
-    }
-    if (lastName.text.isEmpty) {
-      lastNameError = 'Last Name cannot be empty';
-    }
-    if (phoneNumber.text.isEmpty) {
-      phoneNumberError = 'Phone number cannot be empty';
-    }
-    if (password.text.isEmpty) {
-      passwordError = 'Password cannot be empty';
-    }
-    if (confirmPassword.text.isEmpty) {
-      confirmPasswordError = 'Confirm Password cannot be empty';
-    }
-    if (gender.text.isEmpty) {
-      genderError = 'Please select a gender';
-    }
+  Future<void> createAccount( Function()? onPop) async {
+    _isLoading = true;
     notifyListeners();
+    validateAndClearErrors();
 
     if (firstNameError != null || lastNameError != null || phoneNumberError != null || passwordError != null || confirmPasswordError != null || genderError != null) {
+      _isLoading = false;
+      notifyListeners();
       return;
     }
-    notifyListeners();
 
     String modifiedPhoneNumber = phoneNumber.text.replaceFirst('0', '+234');
     String modifiedGender = gender.text.toUpperCase();
 
     final response = await createAccountRepository.createAccount(
       param: CreateAccountParam(
-        firstName: firstName.text,
-        lastName: lastName.text,
-        password: password.text,
-        gender: modifiedGender,
-        phoneNumber: modifiedPhoneNumber
+          firstName: firstName.text,
+          lastName: lastName.text,
+          password: password.text,
+          gender: modifiedGender,
+          phoneNumber: modifiedPhoneNumber
       ),
     );
     if (response.success) {
@@ -158,6 +114,7 @@ class CreateAccountViewModel extends BaseViewModel {
       print("I am sorry but it is a sad news sha");
       snackbarService.error(message: response.message!);
     }
-   _isLoading = false; // Set isLoading to false when the operation finishes
- }
+    _isLoading = false;
+    notifyListeners();
+  }
 }
