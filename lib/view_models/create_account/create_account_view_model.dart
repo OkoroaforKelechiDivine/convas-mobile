@@ -42,7 +42,6 @@ class CreateAccountViewModel extends BaseViewModel {
     confirmPasswordError = confirmPassword.text.isEmpty ? 'Confirm Password cannot be empty' : null;
     confirmPasswordError = password.text != confirmPassword.text ? 'Passwords do not match' : confirmPasswordError;
     genderError = gender.text.isEmpty ? 'Please select a gender' : null;
-
     notifyListeners();
   }
 
@@ -82,7 +81,6 @@ class CreateAccountViewModel extends BaseViewModel {
     notifyListeners();
     return genderError;
   }
-
 
   Future<void> createAccount( Function()? onPop) async {
     _isLoading = true;
