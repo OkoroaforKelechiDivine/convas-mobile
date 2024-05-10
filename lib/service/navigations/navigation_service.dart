@@ -33,11 +33,13 @@ class NavigationService<T, U> {
   Future<T?>? pushAndRemoveUntil(
       Widget page, {
         bool keepPreviousPages = false,
-      }) async =>
-      navigatorKey.currentState?.pushAndRemoveUntil<T>(
-        MaterialPageRoute(builder: (c) => page),
-            (Route<dynamic> route) => keepPreviousPages,
-      );
+      }) async {
+    return navigatorKey.currentState?.pushAndRemoveUntil<T>(
+      MaterialPageRoute(builder: (context) => page),
+          (Route<dynamic> route) => !keepPreviousPages,
+    );
+  }
+
 
   Future<bool?>? maybePop([Object? args]) async =>
       navigatorKey.currentState?.maybePop(args);

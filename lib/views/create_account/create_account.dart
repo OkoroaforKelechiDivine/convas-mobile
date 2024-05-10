@@ -71,7 +71,7 @@ class CreateAccountView extends StatelessWidget {
                   controller: viewModel.confirmPassword,
                   errorText: viewModel.confirmPasswordError,
                   obscureText: true,
-                  onChanged: viewModel.clearPasswordError,
+                  onChanged: viewModel.clearConfirmPasswordError,
                 ),
                 SizedBox(height: 20.h),
                 GenderSelectionWidget(
@@ -84,7 +84,7 @@ class CreateAccountView extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Text("Have an account already? "),
+                    const AppText("Have an account already? "),
                     InkWell(
                       onTap: () {},
                       child: AppText(
@@ -100,17 +100,22 @@ class CreateAccountView extends StatelessWidget {
           ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 0),
-            child: AppButton(
-              onPressed: () {
-                viewModel.createAccount(() {
-                  Navigator.of(context).pushReplacementNamed('/verify_code');
-                });
-              },
-              loading: viewModel.isLoading,
-              color: AppColors.blackColor,
-              child: AppText('Create account', color: AppColors.white),
+            child: Stack(
+              children: [
+                CustomElevatedButton(
+                  onPressed: () {
+                    viewModel.createAccount(() {
+                      CreateAccountViewModel.navigateToVerifyCodeScreen();
+                    });
+                  },
+                  radius: 8.r,
+                  isLoading: viewModel.isLoading,
+                  buttonText: "Create Account",
+                ),
+              ],
             ),
           ),
+
         );
       },
     );

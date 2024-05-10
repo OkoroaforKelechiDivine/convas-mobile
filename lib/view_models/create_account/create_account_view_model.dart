@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:safe_chat/views/verify_code/verify_code_view.dart';
 import 'package:safe_chat/views/welcome/welcome_view.dart';
 import 'package:stacked/stacked.dart';
 
@@ -13,7 +14,10 @@ class CreateAccountViewModel extends BaseViewModel {
   TextEditingController password = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
   TextEditingController gender = TextEditingController();
-  bool isLoading = false;
+
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
 
   String? firstNameError;
   String? lastNameError;
@@ -24,6 +28,10 @@ class CreateAccountViewModel extends BaseViewModel {
 
   void navigateToWelcomeScreen(BuildContext context) {
     navigationService.pushReplacement(const WelcomeView());
+  }
+
+  static void navigateToVerifyCodeScreen() {
+    navigationService.push(const VerifyCodeView());
   }
 
   void validateAndClearErrors() {
@@ -64,6 +72,7 @@ class CreateAccountViewModel extends BaseViewModel {
   }
 
   void updateSelectedGender(String? newValue) {
+    clearGenderError();
     selectedGender = newValue;
     notifyListeners();
   }
@@ -93,13 +102,17 @@ class CreateAccountViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void clearGenderError() {
+  String? clearGenderError() {
     genderError = null;
     notifyListeners();
+    return genderError;
   }
 
+
  Future<void> createAccount( Function()? onPop) async {
-    validateAndClearErrors();
+   _isLoading = true;
+   notifyListeners();
+   validateAndClearErrors();
 
     if (firstName.text.isEmpty) {
       firstNameError = 'First Name cannot be empty';
@@ -124,11 +137,10 @@ class CreateAccountViewModel extends BaseViewModel {
     if (firstNameError != null || lastNameError != null || phoneNumberError != null || passwordError != null || confirmPasswordError != null || genderError != null) {
       return;
     }
-    isLoading = false;
     notifyListeners();
 
     String modifiedPhoneNumber = phoneNumber.text.replaceFirst('0', '+234');
-      String modifiedGender = gender.text.toUpperCase();
+    String modifiedGender = gender.text.toUpperCase();
 
     final response = await createAccountRepository.createAccount(
       param: CreateAccountParam(
@@ -142,9 +154,10 @@ class CreateAccountViewModel extends BaseViewModel {
     if (response.success) {
       snackbarService.success(message: response.data!.message);
       onPop?.call();
-      navigationService.pop();
     } else {
+      print("I am sorry but it is a sad news sha");
       snackbarService.error(message: response.message!);
     }
-  }
+   _isLoading = false; // Set isLoading to false when the operation finishes
+ }
 }
