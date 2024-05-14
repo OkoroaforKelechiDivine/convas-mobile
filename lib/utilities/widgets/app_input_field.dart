@@ -27,7 +27,7 @@ class AppInputField extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadius ?? 5),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(left: 8.0),
+        padding: const EdgeInsets.only(left: 8),
         child: TextField(
           keyboardType: TextInputType.multiline,
           maxLines: null,

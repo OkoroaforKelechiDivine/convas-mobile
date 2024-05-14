@@ -5,10 +5,13 @@ import '../../utilities/constants/app_assets/assets.dart';
 class FeedsViewModel extends BaseViewModel {
   String _inputText = '';
   bool _isWhatIsOnYourMindButtonSelected = true;
+  List<bool> _showComments = [false];
 
   String get inputText => _inputText;
 
   bool get isWhatIsOnYourMindButtonSelected => _isWhatIsOnYourMindButtonSelected;
+
+  bool shouldShowComments(int index) => _showComments[index];
 
   void selectWhatIsOnYourMind() {
     _isWhatIsOnYourMindButtonSelected = true;
@@ -17,6 +20,11 @@ class FeedsViewModel extends BaseViewModel {
 
   void selectWhileYouWereAway() {
     _isWhatIsOnYourMindButtonSelected = false;
+    notifyListeners();
+  }
+
+  void showComments(int index) {
+    _showComments[index] = !_showComments[index];
     notifyListeners();
   }
 
@@ -45,6 +53,7 @@ class FeedsViewModel extends BaseViewModel {
       datePosted: 'May 13, 2024',
       timePosted: "9:45pm",
       impressionsCount: 100,
+      postContent: "You are still the one I love",
       commentsCount: 20,
       comments: [
         Comment(
@@ -57,7 +66,6 @@ class FeedsViewModel extends BaseViewModel {
         ),
       ],
     ),
-    // Add more users as needed
   ];
 }
 
@@ -65,6 +73,7 @@ class User {
   final String name;
   final String image;
   final String datePosted;
+  final String postContent;
   final String timePosted;
   final int impressionsCount;
   final int commentsCount;
@@ -74,6 +83,7 @@ class User {
     required this.name,
     required this.image,
     required this.timePosted,
+    required this.postContent,
     required this.datePosted,
     required this.impressionsCount,
     required this.commentsCount,
