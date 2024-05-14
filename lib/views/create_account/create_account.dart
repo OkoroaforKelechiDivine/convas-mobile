@@ -15,7 +15,7 @@ class CreateAccountView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CreateAccountViewModel>.reactive(
+    return ViewModelBuilder.reactive(
       viewModelBuilder: () => CreateAccountViewModel(),
       builder: (context, viewModel, child) {
         return Scaffold(

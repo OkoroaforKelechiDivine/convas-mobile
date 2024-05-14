@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-class ProfileScreenViewModel extends ChangeNotifier {
+import 'package:stacked/stacked.dart';
+
+class ProfileScreenViewModel extends BaseViewModel {
   File? _image;
   String? userName;
   String? firstName;

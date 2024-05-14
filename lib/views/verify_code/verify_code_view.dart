@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:safe_chat/locator/locator.dart';
+import 'package:safe_chat/views/create_account/create_account.dart';
+import 'package:safe_chat/views/create_profile/create_profile_view.dart';
 import 'package:stacked/stacked.dart';
 import '../../app_style/manager/font_manager.dart';
 import '../../app_style/manager/theme_manager.dart';
@@ -22,7 +25,8 @@ class VerifyCodeView extends StatelessWidget {
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_sharp),
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed('/create_account');
+                navigationService.push(const CreateAccountView());
+                // Navigator.of(context).pushReplacementNamed('/create_account');
               },
             ),
           ),
@@ -73,7 +77,7 @@ class VerifyCodeView extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed('/create_profile');
+                navigationService.push(const CreateProfileView(selectedGender: '',));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.blackColor,

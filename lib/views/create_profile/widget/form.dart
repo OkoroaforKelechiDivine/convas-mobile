@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../view_models/create_profile/create_profile_view_model.dart';
 import '../../create_account/widget/get_text_field.dart';
@@ -19,7 +20,7 @@ class ProfileFormWidget extends StatelessWidget {
             keyboardType: TextInputType.text,
             controller: TextEditingController(text: viewModel.userName),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
           GestureDetector(
             onTap: () => viewModel.selectDate(context),
             child: AbsorbPointer(
@@ -32,13 +33,13 @@ class ProfileFormWidget extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
           AppTextField(
             labelText: 'Bio',
             keyboardType: TextInputType.text,
             controller: TextEditingController(text: viewModel.lastName),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
           AppTextField(
             labelText: 'Hobbies',
             keyboardType: TextInputType.text,
