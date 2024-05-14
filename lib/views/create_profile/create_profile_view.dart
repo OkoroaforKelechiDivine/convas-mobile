@@ -47,9 +47,8 @@ class CreateProfileView extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: ElevatedButton(
               onPressed: () {
-                navigationService.push(const FeedsView());
+                navigationService.pushAndRemoveUntil(const FeedsView());
               },
-
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.blackColor,
               ),
