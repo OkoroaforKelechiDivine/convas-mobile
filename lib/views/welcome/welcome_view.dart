@@ -32,9 +32,9 @@ class WelcomeView extends StatelessWidget {
                       height: 700.h,
                       enlargeCenterPage: true,
                       autoPlay: true,
-                      autoPlayInterval: const Duration(seconds: 8),
+                      autoPlayInterval: const Duration(seconds: 3),
                       autoPlayAnimationDuration:
-                      const Duration(seconds: 2),
+                      const Duration(seconds: 800),
                       autoPlayCurve: Curves.fastOutSlowIn,
                       pauseAutoPlayOnTouch: true,
                       enableInfiniteScroll: true,
@@ -46,7 +46,7 @@ class WelcomeView extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 21),
+                  padding: EdgeInsets.only(left: 21.w, right: 21.w, bottom: 21.h),
                   width: MediaQuery.of(context).size.width,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -109,7 +109,6 @@ class CreateAccountViewModel extends BaseViewModel {
       snackbarService.success(message: response.data!.message);
       onPop?.call();
     } else {
-      print("I am sorry but it is a sad news sha");
       snackbarService.error(message: response.message!);
     }
     _isLoading = false;

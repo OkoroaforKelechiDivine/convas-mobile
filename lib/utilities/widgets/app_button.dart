@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../app_style/manager/theme_manager.dart';
 import 'app_text.dart';
 
@@ -36,16 +37,14 @@ class CustomElevatedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(radius ?? 0),
         ),
       ),
-      child: isLoading
-          ? SizedBox(
-        width: 24,
-        height: 24,
+      child: isLoading ? SizedBox(
+        width: 24.w,
+        height: 24.h,
         child: CircularProgressIndicator(
           strokeWidth: 2,
           valueColor: AlwaysStoppedAnimation<Color>(AppColors.white),
         ),
-      )
-          : AppText(buttonText, color: AppColors.white),
+      ) : AppText(buttonText, color: AppColors.white),
     );
   }
 }

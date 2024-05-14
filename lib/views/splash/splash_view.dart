@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../utilities/app_assets/exports.dart';
+import '../../utilities/constants/app_assets/assets.dart';
 import '../../view_models/splash/splash_view_model.dart';
 
 class SplashView extends StatelessWidget {

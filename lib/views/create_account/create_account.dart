@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safe_chat/utilities/widgets/app_text.dart';
 import 'package:safe_chat/views/create_account/widget/get_text_field.dart';
+import 'package:safe_chat/views/verify_code/verify_code_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:safe_chat/views/create_account/widget/get_dropdown_button.dart';
 import '../../app_style/manager/theme_manager.dart';
+import '../../locator/locator.dart';
 import '../../utilities/widgets/app_button.dart';
 import '../../view_models/create_account/create_account_view_model.dart';
 
@@ -30,7 +32,7 @@ class CreateAccountView extends StatelessWidget {
             ),
           ),
           body: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 2),
+            padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 20.h, top: 2.h),
             child: ListView(
               shrinkWrap: true,
               children: [
@@ -99,14 +101,15 @@ class CreateAccountView extends StatelessWidget {
             ),
           ),
           bottomNavigationBar: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 0),
+            padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 20.h),
             child: Stack(
               children: [
                 CustomElevatedButton(
                   onPressed: () {
-                    viewModel.createAccount(() {
-                      CreateAccountViewModel.navigateToVerifyCodeScreen();
-                    });
+                    navigationService.push(const VerifyCodeView());
+                    // viewModel.createAccount(() {
+                    //   CreateAccountViewModel.navigateToVerifyCodeScreen();
+                    // });
                   },
                   radius: 8.r,
                   isLoading: viewModel.isLoading,
