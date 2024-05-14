@@ -36,7 +36,7 @@ class ImageWithTitleAndContent extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24.sp,
                   fontWeight: AppFontWeight.bold,
-                  color: AppColors.blackColor,
+                  color: AppColors.black,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -44,7 +44,7 @@ class ImageWithTitleAndContent extends StatelessWidget {
               AppText(
                 content,
                 fontSize: 15.sp,
-                color: AppColors.blackColor,
+                color: AppColors.black,
                 alignment: TextAlign.center,
               ),
             ],

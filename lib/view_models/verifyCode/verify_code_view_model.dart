@@ -36,24 +36,24 @@ class VerifyCodeViewModel extends BaseViewModel {
       width: 50.w,
       height: 60.h,
       child: TextField(
-        cursorColor: AppColors.blackColor,
+        cursorColor: AppColors.black,
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide(
-              color: AppColors.blackColor,
+              color: AppColors.black,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide(
-              color: AppColors.blackColor,
+              color: AppColors.black,
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide(
-              color: AppColors.blackColor,
+              color: AppColors.black,
             ),
           ),
           counterText: '',

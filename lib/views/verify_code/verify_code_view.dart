@@ -80,7 +80,7 @@ class VerifyCodeView extends StatelessWidget {
                 navigationService.push(const CreateProfileView(selectedGender: '',));
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.blackColor,
+                backgroundColor: AppColors.black,
               ),
               child: Text('Send', style: TextStyle(color: AppColors.white)),
             ),

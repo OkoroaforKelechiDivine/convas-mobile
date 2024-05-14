@@ -50,7 +50,7 @@ class SnackBarService {
                       child: AppText(
                         message,
                         fontSize: AppFontSize.s14,
-                        color: AppColors.blackColor,
+                        color: AppColors.black,
                       ),
                     )
                   ],
@@ -98,7 +98,7 @@ class SnackBarService {
                   ),
                   Expanded(
                     child:
-                    AppText(message, fontSize: AppFontSize.s14, color: AppColors.blackColor),
+                    AppText(message, fontSize: AppFontSize.s14, color: AppColors.black),
                   )
                 ],
               ),

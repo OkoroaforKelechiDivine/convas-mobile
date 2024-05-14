@@ -50,7 +50,7 @@ class CreateProfileView extends StatelessWidget {
                 navigationService.pushAndRemoveUntil(const FeedsView());
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.blackColor,
+                backgroundColor: AppColors.black,
               ),
               child: Text('Save profile', style: TextStyle(color: AppColors.white)),
             ),

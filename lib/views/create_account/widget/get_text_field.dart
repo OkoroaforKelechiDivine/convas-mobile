@@ -37,7 +37,7 @@ class _AppTextFieldState extends State<AppTextField> {
       controller: widget.controller,
       keyboardType: widget.keyboardType,
       obscureText: _obscureText && widget.obscureText,
-      cursorColor: AppColors.blackColor,
+      cursorColor: AppColors.black,
       onChanged: (_) {
         widget.onChanged?.call();
       },
@@ -45,11 +45,11 @@ class _AppTextFieldState extends State<AppTextField> {
         labelText: widget.labelText,
         errorText: widget.isEmpty == false ? null : widget.errorText,
         labelStyle: getBodySmallStyle(
-          color: AppColors.blackColor,
+          color: AppColors.black,
           fontSize: AppFontSize.s14,
         ),
         hintStyle: getBodySmallStyle(
-          color: AppColors.blackColor,
+          color: AppColors.black,
           fontSize: AppFontSize.s14,
         ),
         fillColor: AppColors.white,
@@ -57,19 +57,19 @@ class _AppTextFieldState extends State<AppTextField> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(
-            color: AppColors.blackColor,
+            color: AppColors.black,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(
-            color: AppColors.blackColor,
+            color: AppColors.black,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(
-            color: AppColors.blackColor,
+            color: AppColors.black,
           ),
         ),
         contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -81,7 +81,7 @@ class _AppTextFieldState extends State<AppTextField> {
           },
           icon: Icon(
             _obscureText ? Icons.visibility_off : Icons.visibility ,
-            color: AppColors.blackColor,
+            color: AppColors.black,
           ),
         ) : null,
       ),

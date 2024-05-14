@@ -80,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildEmailField() {
     return TextFormField(
       controller: _emailController,
-      style: TextStyle(color: AppColors.blackColor),
+      style: TextStyle(color: AppColors.black),
       decoration: InputDecoration(
         labelText: 'Email',
         labelStyle: TextStyle(color: AppColors.grey),
@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildPasswordField() {
     return TextField(
       controller: _passwordController,
-      style: TextStyle(color: AppColors.blackColor),
+      style: TextStyle(color: AppColors.black),
       obscureText: !_isPasswordVisible,
       decoration: InputDecoration(
         labelText: 'Password',

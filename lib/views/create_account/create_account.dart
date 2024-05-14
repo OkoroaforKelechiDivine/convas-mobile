@@ -104,7 +104,7 @@ class CreateAccountView extends StatelessWidget {
             padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 20.h),
             child: Stack(
               children: [
-                CustomElevatedButton(
+                AppButton(
                   onPressed: () {
                     navigationService.push(const VerifyCodeView());
                     // viewModel.createAccount(() {

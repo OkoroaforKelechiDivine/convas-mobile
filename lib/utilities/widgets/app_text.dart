@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:safe_chat/app_style/manager/theme_manager.dart';
 
 class AppText extends StatelessWidget {
   final String text;
@@ -31,7 +32,7 @@ class AppText extends StatelessWidget {
     return Text(text,
         maxLines: maxLines,
         style: TextStyle(
-          color: color,
+          color: color ?? AppColors.black,
           fontWeight: fontWeight,
           fontStyle: fontStyle,
           fontSize: fontSize,
@@ -41,6 +42,5 @@ class AppText extends StatelessWidget {
           height: height,
         ),
         textAlign: alignment);
-    // return Text(text, maxLines: maxLine, style: TextStyle(color: color, fontWeight: fontWeight, fontStyle: fontStyle, fontSize: size, overflow: overflow), textAlign: alignment);
   }
 }

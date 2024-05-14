@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../app_style/manager/theme_manager.dart';
 import 'app_text.dart';
 
-class CustomElevatedButton extends StatelessWidget {
+class AppButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isLoading;
   final String buttonText;
@@ -13,7 +13,7 @@ class CustomElevatedButton extends StatelessWidget {
   final double? height;
   final double? radius;
 
-  const CustomElevatedButton({
+  const AppButton({
     Key? key,
     this.onPressed,
     this.isLoading = false,
@@ -31,7 +31,7 @@ class CustomElevatedButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         padding: padding,
-        backgroundColor: AppColors.blackColor,
+        backgroundColor: AppColors.black,
         minimumSize: Size(width ?? double.infinity, height ?? 0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius ?? 0),
@@ -44,7 +44,8 @@ class CustomElevatedButton extends StatelessWidget {
           strokeWidth: 2,
           valueColor: AlwaysStoppedAnimation<Color>(AppColors.white),
         ),
-      ) : AppText(buttonText, color: AppColors.white),
+      ) : AppText(buttonText, color: AppColors.white
+      ),
     );
   }
 }

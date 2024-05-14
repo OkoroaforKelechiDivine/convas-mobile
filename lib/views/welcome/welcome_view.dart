@@ -60,15 +60,15 @@ class WelcomeView extends StatelessWidget {
                           const EdgeInsets.symmetric(horizontal: 4),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: index == model.currentCarouselIndex ? AppColors.blackColor : AppColors.white,
-                            border: index != model.currentCarouselIndex ? Border.all(color: AppColors.blackColor) : null,
+                            color: index == model.currentCarouselIndex ? AppColors.black : AppColors.white,
+                            border: index != model.currentCarouselIndex ? Border.all(color: AppColors.black) : null,
                           ),
                         ),
                         ),
                       ),
                       SizedBox(
                         width: 150.w,
-                        child: CustomElevatedButton(
+                        child: AppButton(
                           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           onPressed: () {
                             if (model.currentCarouselIndex == model.imageData.length - 1) {

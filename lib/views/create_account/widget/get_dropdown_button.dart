@@ -34,7 +34,7 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
           padding: const EdgeInsets.all(10),
           height: 45.h,
           decoration: BoxDecoration(
-            border: Border.all(color: AppColors.blackColor),
+            border: Border.all(color: AppColors.black),
             borderRadius: BorderRadius.circular(5),
           ),
           child: Row(
@@ -80,8 +80,8 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
               height: 20.w,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: AppColors.blackColor),
-                color: widget.selectedValue == gender ? AppColors.blackColor : AppColors.white,
+                border: Border.all(color: AppColors.black),
+                color: widget.selectedValue == gender ? AppColors.black : AppColors.white,
               ),
             ),
           ),
@@ -90,7 +90,7 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
             gender,
             style: TextStyle(
               fontSize: AppFontSize.s14,
-              color: widget.selectedValue == gender ? AppColors.blackColor : AppColors.blackColor,
+              color: widget.selectedValue == gender ? AppColors.black : AppColors.black,
               fontFamily: GoogleFonts.spectral().fontFamily,
             ),
           ),
