@@ -54,32 +54,33 @@ class UserPostList extends StatelessWidget {
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 40.w),
-                    child: AppText(
-                      user.postContent,
-                      fontSize: AppFontSize.s16,
-                    ),
+                  AppText(
+                    user.postContent,
+                    fontSize: AppFontSize.s16,
                   ),
                   const SizedBox(height: 8),
                   GestureDetector(
                     onTap: () {
                       viewModel.showComments(index);
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 40),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.thumb_up, size: AppFontSize.s20),
-                          SizedBox(width: 4.w),
-                          AppText('${user.impressionsCount} likes'),
-                          SizedBox(width: 15.w),
-                          const Icon(Icons.comment_sharp, size: AppFontSize.s20),
-                          SizedBox(width: 4.w),
-                          const AppText('comments'),
-                          const AppDivider(),
-                        ],
-                      ),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.thumb_up, size: AppFontSize.s20),
+                        SizedBox(width: 4.w),
+                        AppText('${user.impressionsCount} likes'),
+                        SizedBox(width: 15.w),
+                        const Icon(Icons.comment_sharp, size: AppFontSize.s20),
+                        SizedBox(width: 4.w),
+                        AppText('${user.commentsCount} comments'),
+                        const Icon(Icons.comment_sharp, size: AppFontSize.s20),
+                        SizedBox(width: 4.w),
+                        AppText('${user.commentsCount} comments'),
+                        // SizedBox(width: 4.w),
+                        // const Icon(Icons.comment_sharp, size: AppFontSize.s20),
+                        // SizedBox(width: 4.w),
+                        // const Icon(Icons.comment_sharp, size: AppFontSize.s20),
+                        const AppDivider(),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 8),
