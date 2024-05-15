@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:safe_chat/utilities/widgets/app_divider.dart';
 
 import '../../../app_style/manager/font_manager.dart';
 import '../../../app_style/manager/theme_manager.dart';
@@ -36,7 +37,7 @@ class UserPostList extends StatelessWidget {
                         child: Row(
                           children: [
                             CircleAvatar(
-                              backgroundImage: AssetImage(user.image) ,
+                              backgroundImage: AssetImage(user.image),
                             ),
                             AppText(
                               user.name,
@@ -53,21 +54,32 @@ class UserPostList extends StatelessWidget {
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 4.h),
+                  Padding(
+                    padding: EdgeInsets.only(left: 40.w),
+                    child: AppText(
+                      user.postContent,
+                      fontSize: AppFontSize.s16,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
                   GestureDetector(
                     onTap: () {
                       viewModel.showComments(index);
                     },
-                    child: Row(
-                      children: [
-                        const Icon(Icons.thumb_up),
-                        SizedBox(width: 4.w),
-                        AppText('${user.impressionsCount} impressions'),
-                        SizedBox(width: 20.w),
-                        const Icon(Icons.comment),
-                        SizedBox(width: 4.w),
-                        AppText('${user.commentsCount} comments'),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 40),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.thumb_up, size: AppFontSize.s20),
+                          SizedBox(width: 4.w),
+                          AppText('${user.impressionsCount} likes'),
+                          SizedBox(width: 15.w),
+                          const Icon(Icons.comment_sharp, size: AppFontSize.s20),
+                          SizedBox(width: 4.w),
+                          const AppText('comments'),
+                          const AppDivider(),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: 8),
