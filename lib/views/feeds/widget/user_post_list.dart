@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -9,10 +8,10 @@ import '../../../utilities/widgets/app_text.dart';
 import '../../../view_models/feeds/feeds_view_model.dart';
 import '../../create_profile/create_profile_view.dart';
 
-class UserListView extends StatelessWidget {
+class UserPostList extends StatelessWidget {
   final FeedsViewModel viewModel;
 
-  const UserListView({Key? key, required this.viewModel}) : super(key: key);
+  const UserPostList({Key? key, required this.viewModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class UserListView extends StatelessWidget {
                         child: Row(
                           children: [
                             CircleAvatar(
-                              backgroundImage: AssetImage(user.image),
+                              backgroundImage: AssetImage(user.image) ,
                             ),
                             AppText(
                               user.name,
@@ -45,7 +44,7 @@ class UserListView extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(width: 10.h),
+                      SizedBox(width: 5.h),
                       AppText('${user.datePosted} ${user.timePosted}', fontSize: AppFontSize.s12, color: AppColors.grey),
                     ],
                   ),

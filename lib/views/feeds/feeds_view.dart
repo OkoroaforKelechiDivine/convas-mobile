@@ -93,7 +93,7 @@ class FeedsView extends StatelessWidget {
                   onSharePressed: () {},
                 ),
                 SizedBox(height: 20.h),
-                UserListView(viewModel: viewModel),
+                UserPostList(viewModel: viewModel),
               ],
             ),
           ),
@@ -102,4 +102,3 @@ class FeedsView extends StatelessWidget {
     );
   }
 }
-
