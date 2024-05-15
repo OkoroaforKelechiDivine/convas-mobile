@@ -7,13 +7,14 @@ import 'package:safe_chat/utilities/widgets/app_input_field.dart';
 import 'package:safe_chat/utilities/widgets/app_text.dart';
 import 'package:safe_chat/view_models/feeds/feeds_view_model.dart';
 import 'package:safe_chat/views/create_profile/create_profile_view.dart';
+import 'package:safe_chat/views/feeds/widget/app_bar.dart';
+import 'package:safe_chat/views/feeds/widget/button_text.dart';
+import 'package:safe_chat/views/feeds/widget/post_fields.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../app_style/manager/theme_manager.dart';
-
 class FeedsView extends StatelessWidget {
-  const FeedsView({super.key});
-
+  const FeedsView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,26 +22,7 @@ class FeedsView extends StatelessWidget {
       viewModelBuilder: () => FeedsViewModel(),
       builder: (context, viewModel, child) {
         return Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.person_rounded),
-                onPressed: () {},
-              ),
-              const Spacer(),
-              const AppText(
-                "SafeChat",
-                fontSize: AppFontSize.s22,
-                fontWeight: AppFontWeight.bold,
-              ),
-              const Spacer(),
-              IconButton(
-                icon: const Icon(Icons.telegram),
-                onPressed: () {},
-              ),
-            ],
-          ),
+          appBar: const CustomAppBar(),
           body: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -68,9 +50,13 @@ class FeedsView extends StatelessWidget {
                             ),
                           ),
                         ) : null,
-                        child: const AppText(
-                          "What's on your mind?",
-                          fontWeight: AppFontWeight.bold,
+                        child: CustomButtonText(
+                          text: "What's on your mind?",
+                          color: AppColors.black,
+                          isSelected: viewModel.isWhatIsOnYourMindButtonSelected,
+                          onPressed: () {
+                            viewModel.selectWhatIsOnYourMind();
+                          },
                         ),
                       ),
                     ),
@@ -93,38 +79,23 @@ class FeedsView extends StatelessWidget {
                           ),
                           ),
                         ),
-                        child: const AppText(
-                          "While you were away..",
-                          fontWeight: AppFontWeight.bold,
+                        child: CustomButtonText(
+                          text: "While you were away..",
+                          color: AppColors.black,
+                          isSelected: !viewModel.isWhatIsOnYourMindButtonSelected,
+                          onPressed: () {
+                            viewModel.selectWhileYouWereAway();
+                          },
                         ),
                       ),
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: AppInputField(
-                    onChanged: (text) => viewModel.inputText = text,
-                    hintText: "Express yourself",
-                  ),
+                PostInputFields(
+                  hintText: "Express yourself",
+                  onChanged: (text) => viewModel.inputText = text,
+                  onSharePressed: () {},
                 ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: SizedBox(
-                    width: 100.w,
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 10.w),
-                      child: AppButton(
-                        onPressed: () {},
-                        buttonText: 'Share',
-                        height: 10.h,
-                        radius: 8,
-                        width: 10.w,
-                      ),
-                    ),
-                  ),
-                ),
-                const Divider(),
                 SizedBox(height: 20.h),
                 SingleChildScrollView(
                   scrollDirection: Axis.vertical,

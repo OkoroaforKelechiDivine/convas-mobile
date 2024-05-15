@@ -5,7 +5,7 @@ import '../../utilities/constants/app_assets/assets.dart';
 class FeedsViewModel extends BaseViewModel {
   String _inputText = '';
   bool _isWhatIsOnYourMindButtonSelected = true;
-  List<bool> _showComments = [false];
+  final List<bool> _showComments = [false];
 
   String get inputText => _inputText;
 
