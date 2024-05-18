@@ -7,7 +7,7 @@ import '../../../service/network/api_service.dart';
 class CreateAccountApi{
   final _apiService  = ApiService(path: "/api/auths");
 
-  Future<ApiResponse<CreateAccountResponse>> createCustomer({required CreateAccountParam param}) async {
+  Future<ApiResponse<CreateAccountResponse>> createAccount({required CreateAccountParam param}) async {
     try {
       final res = await _apiService.post(
         "/create",

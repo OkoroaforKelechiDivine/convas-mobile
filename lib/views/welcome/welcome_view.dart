@@ -68,6 +68,7 @@ class WelcomeView extends StatelessWidget {
                       ),
                       SizedBox(
                         width: 150.w,
+                        height: 35.h,
                         child: AppButton(
                           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           onPressed: () {

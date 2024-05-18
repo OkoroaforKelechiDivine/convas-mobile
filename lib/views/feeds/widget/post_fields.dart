@@ -49,8 +49,8 @@ class PostInputFields extends StatelessWidget {
                 child: AppButton(
                   onPressed: onSharePressed,
                   buttonText: 'Share',
-                  height: 2.h,
-                  radius: 10,
+                  height: 35.h,
+                  radius: 100,
                 ),
               ),
             ),

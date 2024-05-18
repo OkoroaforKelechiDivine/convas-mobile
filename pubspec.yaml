@@ -14,6 +14,7 @@ dependencies:
   google_fonts: ^4.0.1
   get: ^4.6.5
   get_it:
+  intl_phone_number_input:
   overlay_support:
   font_awesome_flutter:
   dio:

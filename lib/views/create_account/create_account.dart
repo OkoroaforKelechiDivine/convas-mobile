@@ -102,20 +102,14 @@ class CreateAccountView extends StatelessWidget {
           ),
           bottomNavigationBar: Padding(
             padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 20.h),
-            child: Stack(
-              children: [
-                AppButton(
-                  onPressed: () {
-                    navigationService.push(const VerifyCodeView());
-                    // viewModel.createAccount(() {
-                    //   CreateAccountViewModel.navigateToVerifyCodeScreen();
-                    // });
-                  },
-                  radius: 8.r,
-                  isLoading: viewModel.isLoading,
-                  buttonText: "Create Account",
-                ),
-              ],
+            child: AppButton(
+              onPressed: () {
+                navigationService.push(const VerifyCodeView());
+              },
+              radius: 8.r,
+              isLoading: viewModel.isLoading,
+              buttonText: "Create Account",
+              width: double.infinity, // Ensure the button takes the full width
             ),
           ),
         );

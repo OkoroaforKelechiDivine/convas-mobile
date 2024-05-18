@@ -8,6 +8,6 @@ import '../../service/network/api_response.dart';
     final _createAccountAPI = CreateAccountApi();
 
     Future<ApiResponse<CreateAccountResponse>>createAccount({required CreateAccountParam param}) async {
-      return _createAccountAPI.createCustomer(param: param);
+      return _createAccountAPI.createAccount(param: param);
     }
   }

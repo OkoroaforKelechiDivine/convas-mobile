@@ -92,7 +92,7 @@ class FeedsView extends StatelessWidget {
                   onChanged: (text) => viewModel.inputText = text,
                   onSharePressed: () {},
                 ),
-                SizedBox(height: 20.h),
+                // SizedBox(height: 20.h),
                 UserPostList(viewModel: viewModel),
               ],
             ),

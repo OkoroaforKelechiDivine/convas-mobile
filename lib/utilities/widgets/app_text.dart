@@ -41,6 +41,7 @@ class AppText extends StatelessWidget {
           decoration: textDecoration,
           height: height,
         ),
-        textAlign: alignment);
+        textAlign: alignment
+    );
   }
 }
